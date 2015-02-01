@@ -5,11 +5,11 @@ use broodjes2\TeLaet\Controllers\UserController;
 $contr = new UserController($em, $app);
 
 $app->get('/register', function() use ($contr) {
-  $contr->register();
-  
+  $contr->register();  
 })->name('user_register');
+
 $app->post('/register', function() use ($contr) {
-  $contr->register_process();
+  $contr->processRegistration();
 })->name('user_register_process');
 
 

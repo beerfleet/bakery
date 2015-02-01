@@ -1,8 +1,9 @@
 <?php
 
-namespace scrum\ScotchLodge\Service\Validation;
+namespace broodjes2\TeLaet\Service\Validation;
 
 use Valitron\Validator;
+use broodjes2\TeLaet\Entities\Constants\Entities;
 
 class RegistrationValidation extends Validation {
 
@@ -10,7 +11,7 @@ class RegistrationValidation extends Validation {
     // custom rule unique email
     Validator::addRule('unique_email', function($field, $value, array $params) use ($em, $app) {
       $email = $app->request->post('email');
-      $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+      $repo = $em->getRepository(Entities::USER);
       $result = $repo->findBy(array('email' => $email));
       return count($result) < 1;
     }, 'already exists');
@@ -18,13 +19,12 @@ class RegistrationValidation extends Validation {
     // custom rule unique username
     Validator::addRule('unique_username', function($field, $value, array $params) use ($em, $app) {
       $username = $app->request->post('username');
-      $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+      $repo = $em->getRepository(Entities::USER);
       $result = $repo->findBy(array('username' => $username));
       return count($result) < 1;      
     }, 'already exists');
     
-    parent::__construct($app, $em);
-    // custom rule
+    parent::__construct($app, $em);    
   }
   
   public function addRules() {
@@ -35,7 +35,7 @@ class RegistrationValidation extends Validation {
     $val->rule('unique_email', 'email');    
     $val->rule('required', 'email');
     $val->rule('required', 'password');    
-    $val->rule('required', 'first_name')->message('First name is required');
+    $val->rule('required', 'firstname')->message('First name is required');
     $val->rule('required', 'surname');
     $val->rule('equals', 'password', 'password_repeat')->message('Passwords do not match.');    
     $val->rule('required', 'address');

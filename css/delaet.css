@@ -4,6 +4,20 @@
   src: url('../fonts/SHANLN__.ttf') format('truetype');
 }
 
+/* user feedback, messaging, errors */
+.errors {
+  background-color: #ffd9bb;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  line-height: 2em;
+}
+
+.errors ul li {
+  list-style-type: none;
+}
+
 #wrapper {
   background-color: #f4f7d4;
 }

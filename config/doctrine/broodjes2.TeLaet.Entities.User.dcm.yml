@@ -1,6 +1,6 @@
 broodjes2\TeLaet\Entities\User:
   type: entity
-  repositoryClass: broodjes2\TeLaet\Repository\UserRepo
+  #repositoryClass: broodjes2\TeLaet\Repository\UserRepo
   table: user
   id:
     id:
@@ -35,7 +35,7 @@ broodjes2\TeLaet\Entities\User:
     password:
       type: string
       length: 60
-    last_login:
+    last_logon:
       type: datetime
     first_name:
       type: string

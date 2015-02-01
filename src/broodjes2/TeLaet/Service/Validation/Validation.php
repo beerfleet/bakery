@@ -1,6 +1,6 @@
 <?php
 
-namespace scrum\ScotchLodge\Service\Validation;
+namespace broodjes2\TeLaet\Service\Validation;
 
 use Doctrine\ORM\EntityManager;
 use Valitron\Validator;

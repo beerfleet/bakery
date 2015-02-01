@@ -17,7 +17,7 @@ class User {
   private $email;
   private $enabled;
   private $password;
-  private $last_login;
+  private $last_logon;
   private $first_name;
   private $surname;
   /* @var $postcode Postcode */
@@ -66,8 +66,8 @@ class User {
     return $this->password;
   }
 
-  function getLastLogin() {
-    return $this->last_login;
+  function getLastLogon() {
+    return $this->last_logon;
   }
 
   function getFirstName() {
@@ -130,8 +130,8 @@ class User {
     $this->password = $password;
   }
 
-  function setLastLogin($last_login) {
-    $this->last_login = $last_login;
+  function setLastLogon($last_logon) {
+    $this->last_logon = $last_logon;
   }
 
   function setFirstName($first_name) {
