@@ -8,6 +8,10 @@ $app->get('/register', function() use ($contr) {
   $contr->register();
 })->name('user_register');
 
+$app->get('/logon', function() use ($contr){
+  echo "TODO";
+})->name('logon');
+
 /* password */
 $app->get('/password/reset', function() use ($contr) {
   //$contr->passwordResetRequest();  
