@@ -15,4 +15,8 @@ class UserRepository extends EntityRepository {
     return $this->findOneBy(array('password_token' => $token));
   }
   
+  public function findByUsername($username) {
+    return $this->findOneBy(array('username' => $username));
+  }
+  
 }

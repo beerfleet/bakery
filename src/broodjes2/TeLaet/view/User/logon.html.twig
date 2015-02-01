@@ -5,6 +5,20 @@
 {% endblock title %}
 
 {% block content %}
+  <h1>Logon</h1>
   {% set app = globals.app %}
-  <form action="{{ app.urlFor('logon_verify') }}" method="method"></form>
+  <form action="{{ app.urlFor('logon_verify') }}" method="post">
+    
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input class="form-control" type="type" id="username" name="username" />
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input class="form-control" type="password" id="password" name="password" />
+    </div>
+    
+    <input class="form-control" type="submit" id="submit" name="submit" value="Submit" />
+  </form>
 {% endblock content %}

@@ -102,5 +102,18 @@ class UserService {
     }
     return null;
   }
+  
+  public function validateCredentials($app) {
+    $em = $this->em;
+    $repo = $em->getRepository(Entities::USER);
+    /* @var $user User */
+    $user = $repo->findByUsername($app->request->post('username'));
+    $password = $app->request->post('password');
+    $hash = $user->getPassword();
+    if (isset($user) && password_verify($password, $hash)) {
+      return $user;
+    }
+    return null;
+  }
  
 }

@@ -5,6 +5,7 @@ namespace broodjes2\TeLaet\Controllers;
 use broodjes2\TeLaet\Controllers\Controller;
 use broodjes2\TeLaet\Service\User\UserService;
 use Slim\Slim;
+use broodjes2\TeLaet\Entities\User;
 
 /**
  * Description of UserController
@@ -57,7 +58,28 @@ class UserController extends Controller {
   }
   
   public function logonPage() {
-    
+    $globals = $this->getGlobals();
+    $app = $this->getApp();
+    $app->render('User\logon.html.twig', array('globals' => $globals));
+  }
+  
+  public function verifyCredentials() {
+    $srv = $this->user_srv;
+    $app = $this->getApp();
+    /* @var $user User */
+    $user = $srv->validateCredentials($app);
+    if (isset($user) && $user->isEnabled()) {
+      $this->setUserLoggedOn($user->getUsername());
+      $app->redirectTo('main_page');
+    } else {
+      $app->flash('error', 'Access denied.');
+      $app->redirectTo('logon');
+    }
+  }
+  
+  public function logoffProcess() {
+    $this->logoff();
+    $this->getApp()->redirectTo('main_page');
   }
   
 }

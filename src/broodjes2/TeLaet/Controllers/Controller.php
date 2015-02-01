@@ -4,6 +4,7 @@ namespace broodjes2\TeLaet\Controllers;
 
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;
+use broodjes2\TeLaet\Entities\Constants\Entities;
 
 /**
  * Controller abstract controller
@@ -60,7 +61,7 @@ abstract class Controller {
   
   private function queryUserByUserName($username) {    
     $em = $this->getEntityManager();
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $repo = $em->getRepository(Entities::USER);
     $user = $repo->findBy(array('username' => $username));
     return $user;
   }
@@ -87,6 +88,14 @@ abstract class Controller {
       return $user->isAdmin() == 1 ? true : false;
     }
     return false;
+  }
+  
+  public function setUserLoggedOn($username) {
+    $_SESSION['user'] = $username;
+  }
+  
+  public function logoff() {
+    unset($_SESSION['user']);
   }
 
 }

@@ -17,14 +17,18 @@ $app->get('/verify/:token', function($token) use ($contr){
   $contr->verifyRegistration($token);
 });
 
-/* logon */
+/* login */
 $app->get('/logon', function() use ($contr){
   $contr->logonPage();
 })->name('logon');
 
-$app->get('/logon', function() use ($contr){
-  $contr->logonPage();
-})->name('logon');
+$app->post('/logon', function() use ($contr){
+  $contr->verifyCredentials();
+})->name('logon_verify');
+
+$app->get('/logoff', function() use ($contr){
+  $contr->logoffProcess();
+})->name('user_logoff');
 
 
 /* password reset */
