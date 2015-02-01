@@ -8,7 +8,9 @@
 
 #header {
   /*background-color: #fff1cd;*/
-  background-color: #D5DEE7;
+  /*background-color: #D5DEE7;*/
+  background-image: url('../img/header_bg.jpg');
+  
   height: 120px;
 }
 
@@ -16,6 +18,7 @@
   color: #835E29;
   font-family: HeaderFont;
   font-size: 6em;
+  visibility: hidden;
 }
 
 /*MENU*/
