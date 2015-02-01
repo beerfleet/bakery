@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Logon
+{% endblock title %}
+
+{% block content %}
+  {% set app = globals.app %}
+  <form action="{{ app.urlFor('logon_verify') }}" method="method"></form>
+{% endblock content %}
