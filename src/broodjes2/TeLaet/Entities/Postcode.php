@@ -1,6 +1,6 @@
 <?php
 
-namespace scrum\ScotchLodge\Entities;
+namespace broodjes2\TeLaet\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
 

@@ -3,6 +3,7 @@
 namespace broodjes2\TeLaet\Controllers;
 
 use broodjes2\TeLaet\Controllers\Controller;
+use broodjes2\TeLaet\Service\User\UserService;
 
 /**
  * Description of UserController
@@ -15,9 +16,12 @@ class UserController extends Controller {
     parent::__construct($em, $app);
   }
   
-  public function register() {
+  public function register() {    
+    $em = $this->getEntityManager();
     $app = $this->getApp();
-    $app->render('User\register.html.twig', array('globals' => $this->getGlobals()));
+    $user_srv = new UserService($em);
+    $postcodes = $user_srv->fetchPostcodes();
+    $app->render('User\register.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes));
   }
   
 }

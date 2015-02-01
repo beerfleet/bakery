@@ -5,3 +5,57 @@
 {% endblock title %}
 
 
+{% block content %}
+  <div class="container">
+    <h1>Registration form</h1>    
+    <form action="{{ app.urlFor('user_register_process') }}" method="post" novalidate >
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="username" name="username" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password" />
+      </div>            
+
+      <div class="form-group">
+        <label for="password">Password Repeat</label>
+        <input class="form-control" type="password" id="password_bis" name="password_bis" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail address</label>
+        <input class="form-control" type="text" id="email" name="email" />
+      </div>
+
+      <div class="form-group">
+        <label for="firstname">First name</label>
+        <input class="form-control" type="text" id="firstname" name="firstname" />
+      </div>
+
+      <div class="form-group">
+        <label for="surname">Surname</label>
+        <input class="form-control" type="text" id="surname" name="surname" />
+      </div>
+
+      <div class="form-group">
+        <label for="address">Street + Nr.</label>
+        <input class="form-control" type="text" id="address" name="address" />
+      </div>
+
+      <div class="form-group">
+        <label for="postcode">Postcode</label>
+        <select class="form-control" id="postcode" name="postcode">
+          {% for postcode in postcodes %}
+            <option value="{{ postcode.id }}">{{ postcode.postcode }} -- {{ postcode.town }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <input class="form-control" type="submit" id="submit" name="submit" value="Submit" />
+
+    </form>
+  </div>
+{% endblock content %}

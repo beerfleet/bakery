@@ -1,6 +1,6 @@
-broodjes2\DeLaet\Entities\Postcode:
+broodjes2\TeLaet\Entities\Postcode:
   type: entity
-  #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
+  repositoryClass: broodjes2\TeLaet\Repository\PostcodeRepository
   table: postcode
 
   id:

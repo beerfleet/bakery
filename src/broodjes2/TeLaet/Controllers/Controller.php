@@ -18,6 +18,11 @@ abstract class Controller {
   /* @var $app  Slim */
   private $app;
 
+  /**
+   * 
+   * @param EntityManager $em entity manager
+   * @param Slim $app Slim instance
+   */
   function __construct($em, $app) {
     $this->em = $em;
     $this->app = $app;
@@ -25,7 +30,7 @@ abstract class Controller {
       session_start();
     }
   }
-
+  
   public function getEntityManager() {
     return $this->em;
   }

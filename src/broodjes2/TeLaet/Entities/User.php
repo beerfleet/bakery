@@ -1,8 +1,8 @@
 <?php
 
-namespace scrum\ScotchLodge\Entities;
+namespace broodjes2\TeLaet\Entities;
 
-use scrum\ScotchLodge\Entities\Postcode;
+use broodjes2\TeLaet\Entities\Postcode;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
