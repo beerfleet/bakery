@@ -4,6 +4,8 @@
   src: url('../fonts/SHANLN__.ttf') format('truetype');
 }
 
+.floatright {float: right}
+
 #header {
   /*background-color: #fff1cd;*/
   background-color: #D5DEE7;
