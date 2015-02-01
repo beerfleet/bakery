@@ -22,5 +22,10 @@ class HomepageController extends Controller {
     $app->render('homepage.html.twig', array('globals' => $this->getGlobals()));
     
   }
+  
+  public function notFound() {
+   $app = $this->getApp();
+   $app->render('Error\error_404.html.twig', array());
+  }
 
 }
