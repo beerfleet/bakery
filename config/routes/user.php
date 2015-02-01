@@ -6,7 +6,7 @@ $contr = new UserController($em, $app);
 
 $app->get('/register', function() use ($app) {
   echo "TODO REGISTRATION";
-})->name('user_register');
+})->name('register');
 
 /* password */
 $app->get('/password/reset', function() use ($contr) {

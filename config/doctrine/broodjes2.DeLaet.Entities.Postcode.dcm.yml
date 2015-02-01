@@ -1,4 +1,4 @@
-scrum\ScotchLodge\Entities\Postcode:
+broodjes2\DeLaet\Entities\Postcode:
   type: entity
   #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
   table: postcode
@@ -16,10 +16,6 @@ scrum\ScotchLodge\Entities\Postcode:
   oneToMany:
     users:
       targetEntity: User
-      mappedBy: postcode
-    
-    events:
-      targetEntity: Event
       mappedBy: postcode
 
   fields:
