@@ -40,7 +40,7 @@ class UserController extends Controller {
     } else {
       $errors = $validated;
       $app->flash('errors', $errors);
-      $this->register();
+      $app->redirectTo('user_register');
     }
   }
   
