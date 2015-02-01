@@ -41,7 +41,7 @@ abstract class Controller {
   public function getGlobals() {
     $globals = array(
       'app' => $this->app,  // http://docs.slimframework.com/
-      'user' => $this->getUser(), // User
+      'user' => $this->getActiveUser(), // User
       'session' => $this->getSession(), // session var array
       'path' => $_SERVER['REQUEST_URI'], // current path,      
       'root' => 'http://' . $_SERVER['HTTP_HOST']

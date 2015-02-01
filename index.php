@@ -9,7 +9,7 @@ $classloader->register();
 
 try {
   /* routes */  
-  include 'config/routes/register.php';
+  include 'config/routes/user.php';
   include 'config/routes/main.php';
   
   $app->run();

@@ -1,6 +1,6 @@
 <?php
 
-use scrum\ScotchLodge\Controllers\HomepageController;
+use broodjes2\TeLaet\Controllers\HomepageController;
 
 $contr = new HomepageController($em, $app);
 

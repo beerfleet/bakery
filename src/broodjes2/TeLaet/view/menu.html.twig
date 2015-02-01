@@ -7,7 +7,7 @@
       <ul class="nav nav-pills">
         <li>
           {% block login %}
-            {% include 'Profile/logon.html.twig' %}
+            {% include 'User/logon.html.twig' %}
           {% endblock login %}
         </li>
         <li><a href="{{ app.urlFor('user_register') }}">Register</a></li>
