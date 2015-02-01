@@ -6,7 +6,13 @@ $contr = new UserController($em, $app);
 
 $app->get('/register', function() use ($contr) {
   $contr->register();
+  
 })->name('user_register');
+$app->post('/register', function() use ($contr) {
+  $contr->register_process();
+})->name('user_register_process');
+
+
 
 $app->get('/logon', function() use ($contr){
   echo "TODO";
