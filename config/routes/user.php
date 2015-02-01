@@ -17,11 +17,17 @@ $app->get('/verify/:token', function($token) use ($contr){
   $contr->verifyRegistration($token);
 });
 
+/* logon */
 $app->get('/logon', function() use ($contr){
-  echo "TODO";
+  $contr->logonPage();
 })->name('logon');
 
-/* password */
+$app->get('/logon', function() use ($contr){
+  $contr->logonPage();
+})->name('logon');
+
+
+/* password reset */
 $app->get('/password/reset', function() use ($contr) {
   //$contr->passwordResetRequest();  
 })->name('password_reset_request');
