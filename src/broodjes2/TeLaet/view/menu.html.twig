@@ -1,19 +1,21 @@
+{% set app = globals.app %}
 
-
-  {% set app = globals.app %}
-
-  {% if globals.user is not defined or globals.user is null %}
-    <nav id="reg-menu">
+{% if globals.user is not defined or globals.user is null %}
+  <nav id="reg-menu">
+    <div class="container">
       <ul class="nav nav-pills">
         <li><a href="{{ app.urlFor('user_register') }}">Register</a></li>
         <li><a href="{{ app.urlFor('password_reset_request') }}">Forgot password</a></li>
         <li><a href="{{ app.urlFor('logon') }}">Logon</a></li>
       </ul>
-    </nav>
-  {% else %}
-    <nav id="reg-menu">
+    </div>
+  </nav>
+{% else %}
+  <nav id="reg-menu">
+    <div class="container">
       <ul class="nav nav-pills">        
         <li><a href="{{ app.urlFor('user_logoff') }}">Logoff</a></li>            
       </ul>
-    </nav>
-  {% endif %}
+    </div>
+  </nav>
+{% endif %}

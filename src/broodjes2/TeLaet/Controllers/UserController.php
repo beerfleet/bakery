@@ -4,6 +4,7 @@ namespace broodjes2\TeLaet\Controllers;
 
 use broodjes2\TeLaet\Controllers\Controller;
 use broodjes2\TeLaet\Service\User\UserService;
+use Slim\Slim;
 
 /**
  * Description of UserController
@@ -21,23 +22,25 @@ class UserController extends Controller {
   
   public function register() {    
     $em = $this->getEntityManager();
+    /* @var $app Slim */
     $app = $this->getApp();    
     $postcodes = $this->user_srv->fetchPostcodes();
     $app->render('User\register.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes));
   }  
   
   public function processRegistration() {
+    /* @var $app Slim */
     $app = $this->getApp();
     $srv = $this->user_srv;
-    $validated = $srv->validateRegistration($this->getApp());
+    $validated = $srv->validateRegistration($app);
     if (true === $validated) {
-      $srv->processRegistration();
-      $app->flash('Please confirm your registration by clicking the link on the email we sent you.');
+      $srv->processRegistration($app->request()->post());
+      $app->flash('info', 'Please confirm your registration by clicking the link on the email we sent you.');
       $app->redirectTo('main_page');
     } else {
       $errors = $validated;
       $app->flash('errors', $errors);
-      $app->redirectTo('user_register');
+      $this->register();
     }
   }
   

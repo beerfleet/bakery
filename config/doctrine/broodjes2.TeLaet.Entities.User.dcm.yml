@@ -48,6 +48,6 @@ broodjes2\TeLaet\Entities\User:
       length: 255
     password_token:
       type: string
-      length: 64
+      length: 256
     is_admin:
       type: integer      

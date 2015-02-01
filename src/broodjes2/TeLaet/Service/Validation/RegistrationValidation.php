@@ -37,7 +37,7 @@ class RegistrationValidation extends Validation {
     $val->rule('required', 'password');    
     $val->rule('required', 'firstname')->message('First name is required');
     $val->rule('required', 'surname');
-    $val->rule('equals', 'password', 'password_repeat')->message('Passwords do not match.');    
+    $val->rule('equals', 'password', 'password_bis')->message('Passwords do not match.');    
     $val->rule('required', 'address');
   }
 }

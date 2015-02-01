@@ -9,10 +9,11 @@
   <div class="container">
     <h1>Registration form</h1>    
     <form action="{{ app.urlFor('user_register_process') }}" method="post" novalidate >
-
+      {% set post = globals.app.request.post %}
+      
       <div class="form-group">
         <label for="username">Username</label>
-        <input class="form-control" type="text" id="username" name="username" />
+        <input class="form-control" type="text" id="username" name="username" value="{% if post.username is defined %}{{ post.username }}{% endif %}"/>
       </div>
 
       <div class="form-group">
@@ -27,29 +28,29 @@
 
       <div class="form-group">
         <label for="email">E-mail address</label>
-        <input class="form-control" type="text" id="email" name="email" />
+        <input class="form-control" type="text" id="email" name="email" value="{% if post.email is defined %}{{ post.email }}{% endif %}" />
       </div>
 
       <div class="form-group">
         <label for="firstname">First name</label>
-        <input class="form-control" type="text" id="firstname" name="firstname" />
+        <input class="form-control" type="text" id="firstname" name="firstname" value="{% if post.firstname is defined %}{{ post.firstname }}{% endif %}"/>
       </div>
 
       <div class="form-group">
         <label for="surname">Surname</label>
-        <input class="form-control" type="text" id="surname" name="surname" />
+        <input class="form-control" type="text" id="surname" name="surname" value="{% if post.surname is defined %}{{ post.surname }}{% endif %}"/>
       </div>
 
       <div class="form-group">
         <label for="address">Street + Nr.</label>
-        <input class="form-control" type="text" id="address" name="address" />
+        <input class="form-control" type="text" id="address" name="address" value="{% if post.address is defined %}{{ post.address}}{% endif %}" />
       </div>
 
       <div class="form-group">
         <label for="postcode">Postcode</label>
         <select class="form-control" id="postcode" name="postcode">
           {% for postcode in postcodes %}
-            <option value="{{ postcode.id }}">{{ postcode.postcode }} -- {{ postcode.town }}</option>
+            <option value="{{ postcode.id }}" {% if post.postcode == postcode.id %} selected="selected" {% endif %}>{{ postcode.postcode }} -- {{ postcode.town }}</option>
           {% endfor %}
         </select>
       </div>
