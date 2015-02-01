@@ -1,6 +1,6 @@
 <?php
 
-namespace scrum\ScotchLodge\Controllers;
+namespace broodjes2\TeLaet\Controllers;
 
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;
@@ -60,7 +60,7 @@ abstract class Controller {
     return $user;
   }
 
-  public function getUser() {
+  public function getActiveUser() {
     if (isset($_SESSION['user']) && $_SESSION['user'] != null ) {
       $user = $this->queryUserByUserName($_SESSION['user']);
       return isset($user[0]) ? $user[0] : null;
