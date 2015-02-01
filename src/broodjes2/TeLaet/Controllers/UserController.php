@@ -15,5 +15,9 @@ class UserController extends Controller {
     parent::__construct($em, $app);
   }
   
+  public function register() {
+    $app = $this->getApp();
+    $app->render('User\register.html.twig', array('globals' => $this->getGlobals()));
+  }
   
 }

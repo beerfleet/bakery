@@ -4,9 +4,9 @@ use broodjes2\TeLaet\Controllers\UserController;
 
 $contr = new UserController($em, $app);
 
-$app->get('/register', function() use ($app) {
-  echo "TODO REGISTRATION";
-})->name('register');
+$app->get('/register', function() use ($contr) {
+  $contr->register();
+})->name('user_register');
 
 /* password */
 $app->get('/password/reset', function() use ($contr) {
