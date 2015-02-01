@@ -87,5 +87,20 @@ class UserService {
   public function mailUser(User $user, $subject, $message, $header) {
     mail($user->getEmail(), $subject, $message, $header);
   }
+  
+  public function processToken($token) {
+    $em = $this->em;
+    $repo = $em->getRepository(Entities::USER);
+    /* @var $user User */
+    $user = $repo->findUserByToken($token);    
+    if (isset($user)) {
+      $user->resetPasswordToken();
+      $user->setEnabled(1);
+      $em->merge($user);
+      $em->flush();
+      return $user;
+    }
+    return null;
+  }
  
 }

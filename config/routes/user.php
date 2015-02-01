@@ -4,6 +4,7 @@ use broodjes2\TeLaet\Controllers\UserController;
 
 $contr = new UserController($em, $app);
 
+/* registration */
 $app->get('/register', function() use ($contr) {
   $contr->register();  
 })->name('user_register');
@@ -12,7 +13,9 @@ $app->post('/register', function() use ($contr) {
   $contr->processRegistration();
 })->name('user_register_process');
 
-
+$app->get('/verify/:token', function($token) use ($contr){
+  $contr->verifyRegistration($token);
+});
 
 $app->get('/logon', function() use ($contr){
   echo "TODO";

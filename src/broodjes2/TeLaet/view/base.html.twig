@@ -86,16 +86,16 @@
         {% endblock content %}
 
 
-      <div class="push"></div>
+        <div class="push"></div>
       </div>   <!-- END CONTAINER  --> 
 
     </div> <!-- END WRAPPER -->
 
-    <div class="footer">
-      {% block footer %}
+    {% block footer %}
+      <div class="footer">
         <p>Jan Van Biervliet &copy; 2015</p>
-      {% endblock footer %}
-    </div>
+      </div>
+    {% endblock footer %}
 
     <!-- js -->
 

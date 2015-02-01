@@ -44,4 +44,16 @@ class UserController extends Controller {
     }
   }
   
+  public function verifyRegistration($token) {
+    $app = $this->getApp();
+    $srv = $this->user_srv;
+    $user = $srv->processToken($token);
+    if (isset($user)) {
+      $app->flash('info', 'Verfication ok. You may now log on.');
+      $app->redirectTo('logon');
+    } else {
+      $app->redirectTo('error_404');
+    }
+  }
+  
 }
