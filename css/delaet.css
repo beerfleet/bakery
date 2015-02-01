@@ -1,0 +1,23 @@
+/* misc */
+@font-face {
+  font-family: 'HeaderFont';
+  src: url('../fonts/SHANLN__.ttf') format('truetype');
+}
+
+#header {
+  /*background-color: #fff1cd;*/
+  background-color: #D5DEE7;
+  height: 120px;
+}
+
+#header h1 {
+  color: #835E29;
+  font-family: HeaderFont;
+  font-size: 6em;
+}
+
+/*MENU*/
+#reg-menu {
+  border-top: 2px solid #23527C;  
+  border-bottom: 1px solid #23527C;
+}
