@@ -11,10 +11,14 @@
     </div>
   </nav>
 {% else %}
+  {% set logged_in = globals.user %}
   <nav id="reg-menu">
     <div class="container">
       <ul class="nav nav-pills">        
-        <li><a href="{{ app.urlFor('user_logoff') }}">Logoff</a></li>            
+        <li><a href="{{ app.urlFor('user_logoff') }}">Logoff</a></li>
+        {% if logged_in.isAdmin %}
+        <li><a href="{{ app.urlFor('admin_main_page') }}">Admin</a></li>
+        {% endif %}
       </ul>
     </div>
   </nav>
