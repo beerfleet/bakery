@@ -1,0 +1,29 @@
+broodjes2\TeLaet\Entities\Bread:
+  type: entity
+  repositoryClass: broodjes2\TeLaet\Repository\BreadRepository
+  table: bread
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO 
+
+  manyToMany:
+  toppings:
+    targetEntity: broodjesv2\TeLaet\Entities\Topping
+    joinTable: 
+      name: bread_topping
+      joinColumns:
+        bread_id:
+          referencedColumnName: id
+      inverseJoinColumns:
+        topping_id:
+          referencedColumnName: id
+          unique: true
+
+  fields:
+    name:
+      type: string
+      length: 45
+    price:
+      type: integer

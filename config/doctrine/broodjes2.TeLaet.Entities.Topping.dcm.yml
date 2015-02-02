@@ -1,0 +1,16 @@
+broodjes2\TeLaet\Entities\Topping:
+  type: entity
+  repositoryClass: broodjes2\TeLaet\Repository\BreadRepository
+  table: bread
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO  
+
+  fields:
+    name:
+      type: string
+      length: 45
+    price:
+      type: integer
