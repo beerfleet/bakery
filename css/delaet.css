@@ -79,6 +79,18 @@
   padding-left: 5px;
 }
 
+ .controls {
+  margin-top: 6px;  
+}
+.controls button {
+  margin-top: 6px;
+}
+.controls #bread {
+  width: 74%;
+}
+.controls #price {
+  width: 24%;
+}
 
 /* fixed footer */
 * {
