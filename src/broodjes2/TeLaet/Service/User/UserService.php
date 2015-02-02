@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use broodjes2\TeLaet\Entities\Constants\Entities;
 use Doctrine\ORM\Repository;
 use broodjes2\TeLaet\Service\Validation\RegistrationValidation;
+use broodjes2\TeLaet\Service\Validation\PasswordValidation;
 use broodjes2\TeLaet\Entities\User;
 
 use Slim\Slim;
@@ -89,6 +90,11 @@ class UserService {
     mail($user->getEmail(), $subject, $message, $header);
   }
   
+  /**
+   * To be used only for registration, because the user is then enabled
+   * @param type $token
+   * @return type
+   */
   public function processToken($token) {
     $em = $this->em;
     $repo = $em->getRepository(Entities::USER);
@@ -138,6 +144,39 @@ class UserService {
         "Click http://" . $_SERVER['HTTP_HOST'] . "/reset/" . $user->getPasswordToken();
     $header = "From: noreply@janvanbiervliet.com";
     $this->mailUser($user, $subject, $message, $header);
+  }
+  
+  public function verifyToken($token) {
+    $em = $this->em;
+    $repo = $em->getRepository(Entities::USER);
+    /* @var $user User */
+    $user = $repo->findUserByToken($token);    
+    if (isset($user)) {      
+      $user->resetPasswordToken();
+      $em->merge($user);
+      $em->flush();
+      return $user;
+    }
+    return null;
+  }
+  
+  /* @var $app Slim */
+  public function processPassword($app) {
+    $em = $this->em;
+    /* @var $val PasswordValidation */
+    $val = new PasswordValidation($app, $em);
+    if ($val->validate()) {
+      $user_id = $app->request->post('user_id');
+      $repo = $em->getRepository(Entities::USER);
+      $password = $app->request->post('password');
+      $user = $repo->find($user_id);
+      $hash = password_hash($password, CRYPT_BLOWFISH);
+      $user->setPassword($hash);
+      $em->merge($user);
+      $em->flush();
+      return true;
+    }
+    return $val->getErrors();
   }
 
 }

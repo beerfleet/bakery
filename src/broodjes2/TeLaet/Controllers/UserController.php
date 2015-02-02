@@ -98,5 +98,28 @@ class UserController extends Controller {
     $app->redirectTo('main_page');
   }
   
+  public function processToken($token) {    
+    $srv = $this->user_srv;
+    $user = $srv->verifyToken($token);
+    $app = $this->getApp();
+    if (isset($user)) {
+      $app->render('User\password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user->getId()));
+    } else {
+      $app->redirectTo('error_404');
+    }
+  }
+  
+  public function processNewPassword() {
+    $srv = $this->user_srv;
+    $app = $this->getApp();
+    $processed = $srv->processPassword($app);
+    if (true === $processed) {
+      $app->flash('info', 'Your password has been changed');
+      $app->redirectTo('main_page');
+    } else {      
+      $user_id = $app->request->post('user_id');
+      $app->render('User\password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user_id, 'errors' => $processed ));
+    }
+  }
   
 }
