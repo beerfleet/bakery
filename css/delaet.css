@@ -6,8 +6,15 @@
 
 /* misc */
 .floatright {float: right}
-
-
+.even {background-color: #fffae3}
+.odd {background-color: #eadf9e;}
+.btn-small {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.btn-small a {
+  color: blue;
+}
 
 /* user feedback, messaging, errors */
 .errors {
@@ -61,6 +68,15 @@
 #reg-menu {
   border-top: 2px solid #23527C;  
   border-bottom: 1px solid #23527C;
+}
+
+
+/* CONTENT: ADMIN */
+/* breads */
+#breads .bread {
+  border-radius: 3px;
+  line-height: 2em;
+  padding-left: 5px;
 }
 
 
