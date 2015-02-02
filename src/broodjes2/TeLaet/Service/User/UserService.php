@@ -17,6 +17,7 @@ use Slim\Slim;
  */
 class UserService {
 
+  /* @var $em EntityManager */
   private $em;
 
   function __construct($em) {
@@ -76,7 +77,7 @@ class UserService {
   }
   
   public function mailLogonToken(User $user) {
-    $subject = 'First Time Logon TOken';
+    $subject = 'First Time Logon Token';
     $message = 
         "Dear Mr " . $user->getSurname() . ".\n" .
       "Click http://" . $_SERVER['HTTP_HOST'] . "/verify/" . $user->getPasswordToken();
@@ -115,5 +116,28 @@ class UserService {
     }
     return null;
   }
- 
+  
+  /* password reset */
+  public function mailResetRequest($app) {
+    $email = $app->request->post('email');
+    $em = $this->em;
+    $repo = $em->getRepository(Entities::USER);
+    $user = $repo->findOneBy(array('email' => $email));
+    if (isset($user)) {
+      /* @var $user User */
+      $user->setPasswordToken();
+      $em->merge($user);
+      $em->flush();
+      $this->mailResetToken($user);
+    }
+  }
+  
+  public function mailResetToken(User $user) {
+    $subject = 'Reset Token Requested';
+    $message = "Dear Mr " . $user->getSurname() . ".\n" .
+        "Click http://" . $_SERVER['HTTP_HOST'] . "/reset/" . $user->getPasswordToken();
+    $header = "From: noreply@janvanbiervliet.com";
+    $this->mailUser($user, $subject, $message, $header);
+  }
+
 }

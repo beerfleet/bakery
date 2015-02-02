@@ -33,11 +33,11 @@ $app->get('/logoff', function() use ($contr){
 
 /* password reset */
 $app->get('/password/reset', function() use ($contr) {
-  //$contr->passwordResetRequest();  
+  $contr->passwordResetRequest();  
 })->name('password_reset_request');
 
 $app->post('/password/reset', function() use ($contr) {
-  //$contr->passwordResetProcess();
+  $contr->passwordResetProcess();
 })->name('password_reset_process');
 
 $app->get('/verify/:token', function($token) use ($contr) {

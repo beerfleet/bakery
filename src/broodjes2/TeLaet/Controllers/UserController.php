@@ -21,6 +21,7 @@ class UserController extends Controller {
     $this->user_srv = new UserService($em);
   }
   
+  /* registration */
   public function register() {    
     $em = $this->getEntityManager();
     /* @var $app Slim */
@@ -57,6 +58,7 @@ class UserController extends Controller {
     }
   }
   
+  /* logon */
   public function logonPage() {
     $globals = $this->getGlobals();
     $app = $this->getApp();
@@ -81,5 +83,20 @@ class UserController extends Controller {
     $this->logoff();
     $this->getApp()->redirectTo('main_page');
   }
+  
+  /* password reset */
+  public function passwordResetRequest() {
+    $app = $this->getApp();
+    $app->render('User\password_reset_request.html.twig', array());
+  }
+  
+  public function passwordResetProcess() {
+    $app = $this->getApp();        
+    $srv = $this->user_srv;
+    $srv->mailResetRequest($app);
+    $app->flash('info', 'An email has been sent if a valid email address was provided.');
+    $app->redirectTo('main_page');
+  }
+  
   
 }
