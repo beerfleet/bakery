@@ -4,6 +4,7 @@ namespace broodjes2\TeLaet\Controllers;
 
 use broodjes2\TeLaet\Controllers\Controller;
 use broodjes2\TeLaet\Service\Admin\AdminService;
+use broodjes2\TeLaet\Service\Bread\BreadService;
 
 /**
  * AdminController
@@ -24,6 +25,11 @@ class AdminController extends Controller {
     $srv = $this->admin_srv;
     $vars = $srv->provideAllAdminData();
     $app->render('Admin\main_admin.html.twig', array('globals' => $this->getGlobals(), 'vars' => $vars));
+  }
+  
+  public function ajax_add_bread() {    
+    $bread_srv = new BreadService($this->getEntityManager());
+    $bread_srv->addBread($this->getApp());
   }
   
 }

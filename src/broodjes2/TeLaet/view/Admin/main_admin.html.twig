@@ -7,7 +7,7 @@
 {% block content %}
   <h1>Admin panel</h1>
 
-  <h2>Broodjes</h2>  
+  <h2>Breads</h2>  
   <div class="row">
     <div class="col-sm-4">
       {% include 'Admin/breads.html.twig' %}
@@ -17,3 +17,7 @@
   </div>
 
 {% endblock content %}
+
+{% block extrajs %}
+  <script type="text/javascript" src="js/admin.js"></script>
+{% endblock extrajs %}
