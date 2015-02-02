@@ -9,17 +9,18 @@ function add_bread_handler() {
     $.ajax({
       url: '/bread/add',
       type: 'POST',
-      data: {name: bread_name, price: bread_price},
+      data: {name: bread_name, price: bread_price}
     })
-            .done(function () {
-              console.log("success");
-            })
-            .fail(function () {
-              console.log("error");
-            })
-            .always(function () {
-              console.log("complete");
-            });
+    .done(function () {
+      $('#name').val('');
+      $('#price').val('');
+    })
+    .fail(function () {
+      console.log("error");
+    })
+    .always(function () {
+      console.log("complete");
+    });
+  });
+ 
 }
-);
-  

@@ -9,3 +9,7 @@ $contr = new AdminController($em, $app);
 $app->get('/admin', function() use ($contr) {
   $contr->adminPage();
 })->name('admin_main_page');
+
+$app->post('/bread/add', function() use ($contr) {
+  $contr->ajax_add_bread();
+})->name('admin_add_bread');
