@@ -11,6 +11,7 @@ try {
   /* routes */  
   include 'config/routes/user.php';
   include 'config/routes/main.php';
+  include 'config/routes/admin.php';
   
   $app->run();
     
