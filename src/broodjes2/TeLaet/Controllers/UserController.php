@@ -42,7 +42,7 @@ class UserController extends Controller {
     } else {
       $errors = $validated;
       $app->flash('errors', $errors);
-      $app->redirectTo('user_register');
+      $app->render('User\register.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $this->user_srv->fetchPostcodes()));
     }
   }
   
