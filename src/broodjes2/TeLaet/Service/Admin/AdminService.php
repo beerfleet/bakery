@@ -21,7 +21,7 @@ class AdminService {
   public function provideAllAdminData() {
     $vars = array();
     $vars['breads'] = $this->provideBreads();
-    
+    $vars['toppings'] = $this->provideToppings();
     return $vars;
   }
   
@@ -31,6 +31,10 @@ class AdminService {
     $repo = $em->getReposiTory(Entities::BREAD);
     $breads = $repo->findBy(array(), array('name' => 'ASC'));
     return $breads;
+  }
+  
+  public function provideToppings() {
+    
   }
   
 }

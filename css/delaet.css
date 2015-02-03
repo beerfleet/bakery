@@ -73,12 +73,17 @@
 
 /* CONTENT: ADMIN */
 /* breads */
+#bread-panel {  
+  border-radius: 5px;
+  background-color: #6A061B;
+  padding: 6px;  
+  
+}
 #breads .bread {
   border-radius: 5px;
   line-height: 2em;
   padding-left: 5px;
   margin-bottom: 5px;
-
 }
 
  .controls {
