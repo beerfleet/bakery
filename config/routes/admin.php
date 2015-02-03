@@ -16,6 +16,11 @@ $app->get('/admin/breads', function() use ($contr){
   $contr->addBreadPage();
 })->name('admin_manage_breads');
 
+$app->post('/admin/bread/add', function() use ($contr){
+  $contr->addBreadProcess();
+})->name('admin_bread_add');
+
+
 /* toppings */
 
 

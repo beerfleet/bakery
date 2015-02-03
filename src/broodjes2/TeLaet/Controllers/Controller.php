@@ -97,5 +97,5 @@ abstract class Controller {
   public function logoff() {
     unset($_SESSION['user']);
   }
-
+  
 }

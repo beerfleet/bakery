@@ -19,12 +19,15 @@
       {% endfor %}
     </div>
 
+    {% set app = globals.app %}
     <div class="controls">
-      <input type="text" id="name" name="name" />
-      <input type="text" id="price" name="prioe" />
-      <div class="form-group">
-        <button class="form-control btn-success" type="button" name="addbread" id="addbread">Add bread</button>
-      </div>
+      <form action="{{ app.urlFor('admin_bread_add') }}" method="post">
+        <div class="form-group">
+          <input type="text" id="name" name="name" />
+          <input type="text" id="price" name="price" />
+        </div>
+        <input class="form-control btn-success" type="submit" id="submit" name="submit" value="Add bread" />
+      </form>
     </div>
   </div>
 {% endblock content %}

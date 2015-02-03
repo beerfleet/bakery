@@ -2,7 +2,9 @@
 
 namespace broodjes2\TeLaet\Service\Bread;
 
-use broodjes2\TeLaet\Service\Validation\PriceableValidation;
+use broodjes2\TeLaet\Controllers\Controller;
+use broodjes2\TeLaet\Service\Service;
+use broodjes2\TeLaet\Service\Validation\BreadValidation;
 use broodjes2\TeLaet\Service\Validation\ToppingValidation;
 use broodjes2\TeLaet\Entities\Constants\Entities;
 use broodjes2\TeLaet\Entities\Bread;
@@ -13,12 +15,10 @@ use broodjes2\TeLaet\Entities\Topping;
  *
  * @author jan van biervliet
  */
-class BreadService {
-
-  private $em;
+class BreadService extends Service {
 
   public function __construct($em) {
-    $this->em = $em;
+    parent::__construct($em);
   }
 
   public function findBreadByName($name) {
@@ -36,6 +36,26 @@ class BreadService {
     return $val->getErrors();
   }
 
+  public function fetchAllBreads() {
+    $em = $this->getEntityManager();
+    $repo = $em->getRepository(Entities::BREAD);
+    $breads = $repo->findAll();
+    return $breads;
+  }
+
+  public function addBread($app) {
+    $bread_val = new BreadValidation($app, $this->getEntityManager());
+    if ($bread_val->validate()) {
+      $bread = new Bread();
+      $bread->setName($app->request->post('name'));
+      $bread->setPrice($app->request->post('price'));
+      $this->store($bread);
+      return false;
+    } else {
+      return $bread_val->getErrors();
+    }
+  }
+
   public function findToppingByName($name) {
     $em = $this->em;
     $repo = $em->getRepository(Entities::TOPPING);
@@ -50,12 +70,5 @@ class BreadService {
     }
     return $val->getErrors();
   }
-  
-  public function fetchAllBreads() {
-    $em = $this->em;
-    $repo = $em->getRepository(Entities::BREAD);
-    $breads = $repo->findAll();
-    return $breads;
-  }    
 
 }
