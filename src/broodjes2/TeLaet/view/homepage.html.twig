@@ -3,7 +3,7 @@
 
 {% block content %}
 
-  <div class="container welcome">
+  <div class="welcome">
     {% if globals.user is defined and globals.user is not null %}
       {% set user = globals.user %}
       <h1 class="header">Hello, {{ globals.user.username }}</h1>
