@@ -7,8 +7,8 @@
 
 {% block content %}
   <div class="container">
-    <h1>Registration form</h1>    
-    <form action="{{ app.urlFor('user_register_process') }}" method="post" novalidate >
+    <h1 class="header">Registration form</h1>    
+    <form class="bodyBG" action="{{ app.urlFor('user_register_process') }}" method="post" novalidate >
       {% set post = globals.app.request.post %}
       
       <div class="form-group">
@@ -55,7 +55,7 @@
         </select>
       </div>
 
-      <input class="form-control" type="submit" id="submit" name="submit" value="Submit" />
+      <input class="form-control btn-action" type="submit" id="submit" name="submit" value="Submit" />
 
     </form>
   </div>

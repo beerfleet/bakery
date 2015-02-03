@@ -3,8 +3,7 @@
   src: url('../fonts/SHANLN__.ttf') format('truetype');
 }
 
-
-/* misc */
+/* MISC */
 .floatright {float: right}
 .even {background-color: #fffae3}
 .odd {background-color: #eadf9e;}
@@ -14,6 +13,17 @@
 }
 .btn-small a {
   color: blue;
+}
+.bodyBG {
+  border-radius: 5px;
+  background-color: beige;
+  padding: 12px;
+}
+
+/* buttons */
+.btn-action {
+  background-color: #F6FD99;
+  font-weight: bolder;
 }
 
 
@@ -114,6 +124,16 @@ li.active2 {
 .controls #tprice {
   width: 25%;
   float: right;
+}
+
+/* CONTENT */
+.header {
+  border-radius: 10px;
+  height: 60px;
+  padding-top: 10px;    
+  padding-left: 12px;
+  background-color: #DDDDDD;
+  font-size: 1.9em;
 }
 
 /* fixed footer */

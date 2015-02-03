@@ -5,9 +5,9 @@
 {% endblock title %}
 
 {% block content %}
-  <h1>Logon</h1>
+  <h1 class="header">Logon</h1>
   {% set app = globals.app %}
-  <form action="{{ app.urlFor('logon_verify') }}" method="post">
+  <form class="bodyBG" action="{{ app.urlFor('logon_verify') }}" method="post">
     
     <div class="form-group">
       <label for="username">Username</label>
@@ -19,6 +19,6 @@
       <input class="form-control" type="password" id="password" name="password" />
     </div>
     
-    <input class="form-control" type="submit" id="submit" name="submit" value="Submit" />
+    <input class="form-control btn-action" type="submit" id="submit" name="submit" value="Submit" />
   </form>
 {% endblock content %}
