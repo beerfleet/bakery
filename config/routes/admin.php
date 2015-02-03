@@ -13,3 +13,7 @@ $app->get('/admin', function() use ($contr) {
 $app->post('/bread/add', function() use ($contr) {
   $contr->ajax_add_bread();
 })->name('admin_add_bread');
+
+$app->get('/bread/ajaxGet/:name', function($name) use ($contr, $app) {  
+  $contr->ajax_get_bread($name);
+});

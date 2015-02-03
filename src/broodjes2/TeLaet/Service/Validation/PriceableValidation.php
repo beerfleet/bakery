@@ -29,8 +29,9 @@ class PriceableValidation extends Validation {
     $val = $this->getVal();
     $val->rule('required', 'name')->message('The name field cannot be empty.');
     $val->rule('unique_name', 'name');    
+    $val->rule('required', 'price');
     $val->rule('numeric', 'price');
-    $val->rule('min', 'price', 0.10);
+    $val->rule('min', 'price', 0.10)->message('Prioe must be at least 10 cents.');
     
   }
 

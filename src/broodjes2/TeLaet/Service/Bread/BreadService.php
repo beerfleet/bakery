@@ -19,9 +19,16 @@ class BreadService {
     $this->em = $em;
   }
   
+  public function breadCount() {
+    $em = $this->em;
+    $repo = $em->getRepository(Entities::BREAD);
+    $breads = $repo->findAll();
+    return count($breads);
+  }
+  
   public function addBread($app) {
     $validated = $this->validateBread($app);
-    if (true === $validated) {      
+    if (true === $validated) {
       $em = $this->em;
       $bread = new Bread();
       $name = ucwords($app->request->post('name'));            
@@ -29,7 +36,21 @@ class BreadService {
       $bread->setPrice($app->request->post('price') * 100);
       $em->persist($bread);
       $em->flush();
+      
+      $bread_count = $this->breadCount();      
+      $json_bread = array('id' => $bread->getId(), 'name' => $bread->getName(), 'price' => $bread->getPrice(), 'count' => $bread_count);
+      $app->response->body(json_encode($json_bread));
+    } else {
+      $encode = array('error' => 1, 'messages' => $validated);
+      $app->response->body(json_encode($encode));
     }
+  }
+  
+  public function findBreadByName($name) {
+    $em = $this->em;
+    $repo = $em->getRepository(Entities::BREAD);
+    $bread = $repo->findBy(array('name' => $name));
+    return count($bread) == 0 ? null : $bread[0];
   }
   
   public function validateBread($app) {

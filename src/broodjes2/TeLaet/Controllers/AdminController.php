@@ -5,6 +5,7 @@ namespace broodjes2\TeLaet\Controllers;
 use broodjes2\TeLaet\Controllers\Controller;
 use broodjes2\TeLaet\Service\Admin\AdminService;
 use broodjes2\TeLaet\Service\Bread\BreadService;
+use Slim\Slim;
 
 /**
  * AdminController
@@ -30,6 +31,23 @@ class AdminController extends Controller {
   public function ajax_add_bread() {    
     $bread_srv = new BreadService($this->getEntityManager());
     $bread_srv->addBread($this->getApp());
+  }
+  
+  public function ajax_get_bread($name) {
+    /* @var $app Slim */
+    $app = $this->getApp();
+    if ($app->request()->isAjax()) {
+      $bread_srv = new BreadService($this->getEntityManager());
+      $bread = $bread_srv->findBreadByName($name);
+      if (null != $bread) {
+        $app->response()->setBody(json_encode($bread));
+      } else {
+        $errors = true;
+      }
+      
+    } else {
+      $app->redirectTo('error_404');
+    }
   }
   
 }
