@@ -4,6 +4,18 @@
   TeLaet admin page
 {% endblock title %}
 
+{% block nav_menu %}
+  {{ parent() }}
+  <nav id="l2-menu">
+    <div class="container">
+      <ul class="nav nav-pills">        
+        <li><a href="{{ app.urlFor('admin_main_page') }}">Breads</a></li>
+        <li><a href="#">Users</a></li>
+      </ul>
+    </div>
+  </nav>
+{% endblock nav_menu %}
+
 {% block content %}
   <h1>Admin panel</h1>
 
