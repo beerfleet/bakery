@@ -100,8 +100,9 @@
     <!-- js -->
 
     <script type="text/javascript">
+      $('.flagged').css('cursor', 'pointer');
       $('.flagged').on('click', function (e) {
-        $(this).hide();
+        $(this).hide();        
       });
     </script>
     {% block extrajs %}      
