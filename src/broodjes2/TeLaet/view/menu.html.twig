@@ -4,13 +4,13 @@
   <nav id="reg-menu">
     <div class="container">
       <ul class="nav nav-pills">
-        <li {% if app.urlFor('user_register') == globals.path %} class="active" {% endif %}>
+        <li {% if app.urlFor('user_register') == globals.path %} class="active2" {% endif %}>
           <a href="{{ app.urlFor('user_register') }}">Register</a>
         </li>
-        <li {% if app.urlFor('password_reset_request') == globals.path %} class="active" {% endif %}>
+        <li {% if app.urlFor('password_reset_request') == globals.path %} class="active2" {% endif %}>
           <a href="{{ app.urlFor('password_reset_request') }}">Forgot password</a>
         </li>
-        <li {% if app.urlFor('logon') == globals.path %} class="active" {% endif %}>
+        <li {% if app.urlFor('logon') == globals.path %} class="active2" {% endif %}>
           <a href="{{ app.urlFor('logon') }}">Logon</a>
         </li>
       </ul>
@@ -21,11 +21,11 @@
   <nav id="reg-menu">
     <div class="container">
       <ul class="nav nav-pills">        
-        <li {% if app.urlFor('user_logoff') == globals.path %} class="active" {% endif %}>
+        <li {% if app.urlFor('user_logoff') == globals.path %} class="active2" {% endif %}>
           <a href="{{ app.urlFor('user_logoff') }}">Logoff</a>
         </li>
         {% if logged_in.isAdmin %}
-        <li {% if app.urlFor('admin_main_page') == globals.path %} class="active" {% endif %}>
+        <li {% if app.urlFor('admin_main_page') == globals.path %} class="active2" {% endif %}>
           <a href="{{ app.urlFor('admin_main_page') }}">Admin</a>
         </li>
         {% endif %}

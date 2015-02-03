@@ -22,49 +22,21 @@ class AdminController extends Controller {
   }
   
   public function adminPage() {
-    $app = $this->getApp();
-    $srv = $this->admin_srv;
-    $vars = $srv->provideAllAdminData();
-    $app->render('Admin\main_admin.html.twig', array('globals' => $this->getGlobals(), 'vars' => $vars));
+    $app = $this->getApp();        
+    $app->render('Admin\main_admin.html.twig', array('globals' => $this->getGlobals()));
   }
   
-  public function ajax_add_bread() {    
+  public function addBreadPage() {
     $bread_srv = new BreadService($this->getEntityManager());
-    $bread_srv->addBread($this->getApp());
+    $breads = $bread_srv->fetchAllBreads();
+    $this->getApp()->render('Admin/breads.html.twig', array('globals' => $this->getGlobals() ,'breads' => $breads));
   }
   
-  public function ajax_get_bread($name) {
-    /* @var $app Slim */
+  /* users */
+  public function listAllUsers() {
     $app = $this->getApp();
-    if ($app->request()->isAjax()) {
-      $bread_srv = new BreadService($this->getEntityManager());
-      $bread = $bread_srv->findBreadByName($name);
-      if (null != $bread) {
-        $app->response()->setBody(json_encode($bread));
-      } 
-      
-    } else {
-      $app->redirectTo('error_404');
-    }
+    $app->render('Admin/user_list.html.twig', array('globals' => $this->getGlobals()));
   }
   
-  public function ajax_add_topping() {    
-    $bread_srv = new BreadService($this->getEntityManager());
-    $bread_srv->addTopping($this->getApp());
-  }
-    
-  public function ajax_get_topping($name) {
-    /* @var $app Slim */
-    $app = $this->getApp();
-    if ($app->request()->isAjax()) {
-      $bread_srv = new BreadService($this->getEntityManager());
-      $topping = $bread_srv->findToppingByName($name);
-      if (null != $topping) {
-        $app->response()->setBody(json_encode($topping));
-      } 
-      
-    } else {
-      $app->redirectTo('error_404');
-    }
-  }
+  //users
 }

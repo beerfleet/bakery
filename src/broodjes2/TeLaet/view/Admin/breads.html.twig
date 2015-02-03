@@ -1,21 +1,30 @@
-{% set breads = vars.breads %}
+{% extends 'base.html.twig' %}
 
-<div id="bread-panel">
-  <div id="breads">
-    {% for bread in breads %}
-      <div class="bread {{ cycle(['even','odd'],loop.index) }}">      
-        <span class="btn btn-danger btn-small" ><a href="#"> X </a></span>
-        <span class="floatright bread" data-breadid="{{ bread.id }}"> &euro; {{ (bread.price / 100)|number_format(2) }}</span>
-        <span>{{ bread.name }}</span>
-      </div>  
-    {% endfor %}
-  </div>
+{% block nav_menu %}
+  {{ parent() }}
+  {% set app = globals.app %}
+  {% include 'Admin/admin.menu.l2.html.twig' %}
+{% endblock nav_menu %}
 
-  <div class="controls">
-    <input type="text" id="name" name="name" />
-    <input type="text" id="price" name="prioe" />
-    <div class="form-group">
-      <button class="form-control btn-success" type="button" name="addbread" id="addbread">Add bread</button>
+{% block content %}
+  <h1>Bread management</h1>
+  <div id="bread-panel">
+    <div id="breads">
+      {% for bread in breads %}
+        <div class="bread {{ cycle(['even','odd'],loop.index) }}">      
+          <span class="btn btn-danger btn-small" ><a href="#"> X </a></span>
+          <span class="floatright bread" data-breadid="{{ bread.id }}"> &euro; {{ (bread.price / 100)|number_format(2) }}</span>
+          <span>{{ bread.name }}</span>
+        </div>  
+      {% endfor %}
+    </div>
+
+    <div class="controls">
+      <input type="text" id="name" name="name" />
+      <input type="text" id="price" name="prioe" />
+      <div class="form-group">
+        <button class="form-control btn-success" type="button" name="addbread" id="addbread">Add bread</button>
+      </div>
     </div>
   </div>
-</div>
+{% endblock content %}

@@ -12,19 +12,14 @@ $app->get('/admin', function() use ($contr) {
 
 
 /* breads */
-$app->post('/bread/add', function() use ($contr) {
-  $contr->ajax_add_bread();
-})->name('ajax_admin_add_bread');
-
-$app->get('/bread/ajaxGet/:name', function($name) use ($contr) {  
-  $contr->ajax_get_bread($name);
-})->name('ajax_get_bread');
+$app->get('/admin/breads', function() use ($contr){
+  $contr->addBreadPage();
+})->name('admin_manage_breads');
 
 /* toppings */
-$app->post('/topping/add', function() use ($contr) {
-  $contr->ajax_add_topping();
-})->name('ajax_admin_add_topping');
 
-$app->get('/topping/ajaxGet/:name', function($name) use ($contr) {  
-  $contr->ajax_get_topping($name);
-})->name('ajax_get_topping');
+
+/* users */
+$app->get('/admin/users', function() use ($contr){
+  $contr->listAllUsers();
+})->name('admin_user_list');

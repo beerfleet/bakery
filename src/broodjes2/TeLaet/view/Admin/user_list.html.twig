@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% set app = globals.app %}
+{% block nav_menu %}
+  {{ parent() }}
+  {% include 'Admin/admin.menu.l2.html.twig' %}
+{% endblock nav_menu %}
+
+{% block content %}
+  <h1>Here comes the user list</h1>
+{% endblock content %}
