@@ -1,0 +1,12 @@
+<nav id="l2-menu">
+  <div class="container">
+    <ul class="nav nav-pills">        
+      <li {% if app.urlFor('admin_main_page') == globals.path %} class="active2" {% endif %}>
+        <a href="{{ app.urlFor('admin_main_page') }}">Breads</a>
+      </li>
+      <li>
+        <a href="#">Users</a>
+      </li>
+    </ul>
+  </div>
+</nav>

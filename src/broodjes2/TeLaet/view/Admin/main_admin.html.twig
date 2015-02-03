@@ -5,15 +5,9 @@
 {% endblock title %}
 
 {% block nav_menu %}
-  {{ parent() }}
-  <nav id="l2-menu">
-    <div class="container">
-      <ul class="nav nav-pills">        
-        <li><a href="{{ app.urlFor('admin_main_page') }}">Breads</a></li>
-        <li><a href="#">Users</a></li>
-      </ul>
-    </div>
-  </nav>
+  {{ parent() }}  
+  {% set app = globals.app %}  
+  {% include 'Admin/admin.menu.l2.html.twig' %}
 {% endblock nav_menu %}
 
 {% block content %}

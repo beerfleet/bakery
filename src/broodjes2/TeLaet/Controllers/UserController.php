@@ -87,7 +87,7 @@ class UserController extends Controller {
   /* password reset */
   public function passwordResetRequest() {
     $app = $this->getApp();
-    $app->render('User\password_reset_request.html.twig', array());
+    $app->render('User\password_reset_request.html.twig', array('globals' => $this->getGlobals()));
   }
   
   public function passwordResetProcess() {
