@@ -1,7 +1,7 @@
 broodjes2\TeLaet\Entities\Topping:
   type: entity
   repositoryClass: broodjes2\TeLaet\Repository\BreadRepository
-  table: bread
+  table: topping
   id:
     id:
       type: integer

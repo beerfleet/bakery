@@ -3,8 +3,10 @@
 namespace broodjes2\TeLaet\Service\Bread;
 
 use broodjes2\TeLaet\Service\Validation\PriceableValidation;
+use broodjes2\TeLaet\Service\Validation\ToppingValidation;
 use broodjes2\TeLaet\Entities\Constants\Entities;
 use broodjes2\TeLaet\Entities\Bread;
+use broodjes2\TeLaet\Entities\Topping;
 
 /**
  * BreadService
@@ -46,6 +48,7 @@ class BreadService {
     }
   }
   
+  
   public function findBreadByName($name) {
     $em = $this->em;
     $repo = $em->getRepository(Entities::BREAD);
@@ -59,5 +62,47 @@ class BreadService {
       return true;
     }
     return $val->getErrors();
+  }
+  
+  public function addTopping($app) {
+    $validated = $this->validateTopping($app);
+    if (true === $validated) {
+      $em = $this->em;
+      $topping = new Topping();
+      $name = ucwords($app->request->post('name'));            
+      $topping->setName($name);
+      $topping->setPrice($app->request->post('price') * 100);
+      $em->persist($topping);
+      $em->flush();
+      
+      $topping_count = $this->toppingCount();      
+      $json_topping = array('id' => $topping->getId(), 'name' => $topping->getName(), 'price' => $topping->getPrice(), 'count' => $topping_count);
+      $app->response->body(json_encode($json_topping));
+    } else {
+      $encode = array('error' => 1, 'messages' => $validated);
+      $app->response->body(json_encode($encode));
+    }
+  }
+  
+  public function findToppingByName($name) {
+    $em = $this->em;
+    $repo = $em->getRepository(Entities::TOPPING);
+    $topping = $repo->findBy(array('name' => $name));
+    return count($topping) == 0 ? null : $topping[0];
+  }
+  
+  public function validateTopping($app) {
+    $val = new ToppingValidation($app, $this->em, Entities::TOPPING);
+    if ($val->validate()) {
+      return true;
+    }
+    return $val->getErrors();
+  }
+  
+  public function toppingCount() {
+    $em = $this->em;
+    $repo = $em->getRepository(Entities::TOPPING);
+    $toppings= $repo->findAll();
+    return count($toppings);
   }
 }

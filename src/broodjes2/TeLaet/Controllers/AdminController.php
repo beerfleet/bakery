@@ -41,13 +41,30 @@ class AdminController extends Controller {
       $bread = $bread_srv->findBreadByName($name);
       if (null != $bread) {
         $app->response()->setBody(json_encode($bread));
-      } else {
-        $errors = true;
-      }
+      } 
       
     } else {
       $app->redirectTo('error_404');
     }
   }
   
+  public function ajax_add_topping() {    
+    $bread_srv = new BreadService($this->getEntityManager());
+    $bread_srv->addTopping($this->getApp());
+  }
+    
+  public function ajax_get_topping($name) {
+    /* @var $app Slim */
+    $app = $this->getApp();
+    if ($app->request()->isAjax()) {
+      $bread_srv = new BreadService($this->getEntityManager());
+      $topping = $bread_srv->findToppingByName($name);
+      if (null != $topping) {
+        $app->response()->setBody(json_encode($topping));
+      } 
+      
+    } else {
+      $app->redirectTo('error_404');
+    }
+  }
 }

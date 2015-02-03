@@ -73,13 +73,15 @@
 
 /* CONTENT: ADMIN */
 /* breads */
-#bread-panel {  
+#bread-panel,
+#topping-panel {  
   border-radius: 5px;
   background-color: #6A061B;
   padding: 6px;  
   
 }
-#breads .bread {
+#breads .bread,
+#toppings .topping {
   border-radius: 5px;
   line-height: 2em;
   padding-left: 5px;
@@ -92,10 +94,12 @@
 .controls button {
   margin-top: 6px;
 }
-.controls #bread {
-  width: 75%;
+.controls #name,
+.controls #tname {
+  width: 74%;
 }
-.controls #price {
+.controls #price,
+.controls #tprice {
   width: 25%;
   float: right;
 }

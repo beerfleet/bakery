@@ -7,12 +7,15 @@
 {% block content %}
   <h1>Admin panel</h1>
 
-  <h2>Breads</h2>  
   <div class="row">
     <div class="col-sm-4">
+      <h2>Breads</h2>  
       {% include 'Admin/breads.html.twig' %}
     </div>
-    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+      <h2>Toppings</h2>
+      {% include 'Admin/toppings.html.twig' %}
+    </div>
     <div class="col-sm-4"></div>
   </div>
 

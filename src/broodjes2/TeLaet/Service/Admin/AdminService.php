@@ -34,7 +34,11 @@ class AdminService {
   }
   
   public function provideToppings() {
-    
+    $em = $this->em;
+    /* @var $repo EntityRepository */
+    $repo = $em->getReposiTory(Entities::TOPPING);
+    $toppings = $repo->findBy(array(), array('name' => 'ASC'));
+    return $toppings;
   }
   
 }

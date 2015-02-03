@@ -1,0 +1,21 @@
+{% set toppings = vars.toppings %}
+
+<div id="topping-panel">
+  <div id="toppings">
+    {% for topping in toppings %}
+      <div class="topping {{ cycle(['even','odd'],loop.index) }}">      
+        <span class="btn btn-danger btn-small" ><a href="#"> X </a></span>
+        <span class="floatright topping" data-toppingid="{{ topping.id }}"> &euro; {{ (topping.price / 100)|number_format(2) }}</span>
+        <span>{{ topping.name }}</span>
+      </div>  
+    {% endfor %}
+  </div>
+
+  <div class="controls">
+    <input type="text" id="tname" name="tname" />
+    <input type="text" id="tprice" name="tprioe" />
+    <div class="form-group">
+      <button class="form-control btn-success" type="button" name="addtopping" id="addtopping">Add topping</button>
+    </div>
+  </div>
+</div>
