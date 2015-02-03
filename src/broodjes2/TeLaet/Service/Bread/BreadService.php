@@ -9,6 +9,7 @@ use broodjes2\TeLaet\Service\Validation\ToppingValidation;
 use broodjes2\TeLaet\Entities\Constants\Entities;
 use broodjes2\TeLaet\Entities\Bread;
 use broodjes2\TeLaet\Entities\Topping;
+use Doctrine\ORM\EntityManager;
 
 /**
  * BreadService
@@ -48,7 +49,7 @@ class BreadService extends Service {
     if ($bread_val->validate()) {
       $bread = new Bread();
       $bread->setName($app->request->post('name'));
-      $bread->setPrice($app->request->post('price'));
+      $bread->setPrice($app->request->post('price') * 100);
       $this->store($bread);
       return false;
     } else {
@@ -69,6 +70,20 @@ class BreadService extends Service {
       return true;
     }
     return $val->getErrors();
+  }
+
+  public function removeBreadById($id) {
+    /* @var $em EntityManager */
+    $em = $this->getEntityManager();
+    $repo = $em->getRepository(Entities::BREAD);
+    $bread = $repo->find($id);
+    if ($bread != null) {
+      $em->remove($bread);
+      $em->flush();
+      return $bread;
+    } else {
+      return null;
+    }
   }
 
 }

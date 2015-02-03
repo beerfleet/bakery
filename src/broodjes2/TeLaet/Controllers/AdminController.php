@@ -51,15 +51,34 @@ class AdminController extends Controller {
     $errors = $bread_srv->addBread($this->getApp());
     $app = $this->getApp();
     if (false === $errors) {
-      $app->flash('info', 'Bread added');
+      $app->flash('info', $app->request->post('name') . ' added');
     } else {
       $app->flash('errors', $errors);
     }
     $app->redirectTo('admin_manage_breads');
   }
 
-  /* users */
+  public function removeBread($id) {
+    $app = $this->getApp();
+    if ($this->isUserAdmin()) {
+      $bread_srv = new BreadService($this->getEntityManager());
+      $bread = $bread_srv->removeBreadById($id);
+      if (isset($bread)) {
+        $app->flash('info', 'Removed ' . $bread->getName());
+        $app->redirectTo('admin_manage_breads');
+      } else {
+        $app->flash('error', 'Invalid operation.');
+        $app->redirectTo('admin_manage_breads');
+      }
+    } else {
+      $app->flash('error', 'Unauthorized action');
+      $app->redirectTo('main_page');
+    }
+  }
 
+  // breads
+
+  /* users */
   public function listAllUsers() {
     $app = $this->getApp();
     $app->render('Admin/user_list.html.twig', array('globals' => $this->getGlobals()));

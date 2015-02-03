@@ -7,12 +7,13 @@
 {% endblock nav_menu %}
 
 {% block content %}
+  {% set app = globals.app %}
   <h1 class="header">Bread management</h1>
   <div id="bread-panel">
     <div id="breads">
       {% for bread in breads %}
         <div class="bread {{ cycle(['even','odd'],loop.index) }}">      
-          <span class="btn btn-danger btn-small" ><a href="#"> X </a></span>
+          <a href="{{ app.urlFor('admin_bread_remove', {'id': bread.id }) }}"><span class="glyphicon glyphicon-remove" ></span></a>
           <span class="floatright bread price" data-breadid="{{ bread.id }}"> &euro; {{ (bread.price / 100)|number_format(2) }}</span>
           <span>{{ bread.name }}</span>
         </div>  

@@ -20,6 +20,10 @@ $app->post('/admin/bread/add', function() use ($contr){
   $contr->addBreadProcess();
 })->name('admin_bread_add');
 
+$app->get('/admin/bread/remove/:id', function($id) use ($contr) {
+  $contr->removeBread($id);
+})->name('admin_bread_remove');
+
 
 /* toppings */
 
