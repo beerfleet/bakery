@@ -13,7 +13,7 @@
       {% for bread in breads %}
         <div class="bread {{ cycle(['even','odd'],loop.index) }}">      
           <span class="btn btn-danger btn-small" ><a href="#"> X </a></span>
-          <span class="floatright bread" data-breadid="{{ bread.id }}"> &euro; {{ (bread.price / 100)|number_format(2) }}</span>
+          <span class="floatright bread price" data-breadid="{{ bread.id }}"> &euro; {{ (bread.price / 100)|number_format(2) }}</span>
           <span>{{ bread.name }}</span>
         </div>  
       {% endfor %}

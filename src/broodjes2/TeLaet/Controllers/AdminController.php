@@ -35,9 +35,15 @@ class AdminController extends Controller {
   /* breads */
 
   public function addBreadPage() {
-    $bread_srv = new BreadService($this->getEntityManager());
-    $breads = $bread_srv->fetchAllBreads();
-    $this->getApp()->render('Admin/breads.html.twig', array('globals' => $this->getGlobals(), 'breads' => $breads));
+    $app = $this->getApp();
+    if ($this->isUserAdmin()) {
+      $bread_srv = new BreadService($this->getEntityManager());
+      $breads = $bread_srv->fetchAllBreads();
+      $this->getApp()->render('Admin/breads.html.twig', array('globals' => $this->getGlobals(), 'breads' => $breads));
+    } else {
+      $app->flash('error', 'Unauthorized action');
+      $app->redirectTo('main_page');
+    }
   }
 
   public function addBreadProcess() {
