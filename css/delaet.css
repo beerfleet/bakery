@@ -145,6 +145,12 @@ li.active2 {
   background-color: #DDDDDD;
   font-size: 1.9em;
 }
+.subtitle {
+  border-bottom: 1px solid #e3e3e3;
+}
+h2 {
+  font-size: 1.75em;
+}
 
 /* fixed footer */
 * {
