@@ -74,6 +74,37 @@ class AdminController extends Controller {
       $app->redirectTo('main_page');
     }
   }
+  
+  public function editBread($id) {
+    $app = $this->getApp();
+    if ($this->isUserAdmin()) {
+      $bread_srv = new BreadService($this->getEntityManager());
+      $bread = $bread_srv->findBread($id);
+      if (isset($bread)) {
+        $app->render('Admin/edit_bread.html.twig', array('globals' => $this->getGlobals(), 'bread' => $bread));
+      } else {
+        $app->flash('error', 'Invalid operation.');
+        $app->redirectTo('admin_manage_breads');
+      }
+    } else {
+      $app->flash('error', 'Unauthorized action');
+      $app->redirectTo('main_page');
+    }
+  }
+  
+  public function editBreadProcess() {
+    $app = $this->getApp();
+    $bread_srv = new BreadService($this->getEntityManager());
+    $errors = $bread_srv->editBread($app);
+    if (false === $errors) {
+      $app->flash('info', 'Bread updated');
+      $app->redirectTo('admin_manage_breads');
+    } else {
+      $app->flash('errors', $errors);
+      /* @var $app Slim */
+      $app->redirectTo('admin_bread_edit', array('id' => $app->request->post('id')));      
+    }
+  }
   // breads
 
   /* toppings */
@@ -98,7 +129,7 @@ class AdminController extends Controller {
     } else {
       $app->flash('errors', $errors);
     }
-    $app->redirectTo('admin_manage_breads');
+    $app->redirectTo('admin_manage_toppings');
   }
   
   public function removeTopping($id) {

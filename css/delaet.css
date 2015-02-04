@@ -105,7 +105,9 @@ li.active2 {
 #bread-panel,
 #topping-panel {  
   border-radius: 5px;
-  background-color: #6A061B;
+  /*background-color: #6A061B;*/
+  background-color: #D3E1FA;
+
   padding: 6px;  
   
 }
@@ -116,11 +118,11 @@ li.active2 {
   padding-left: 5px;
   margin-bottom: 5px;
 }
-.bread .price {
+.pad-right-6 {
   padding-right: 6px;
 }
 
- .controls {
+.controls {
   margin-top: 6px;  
 }
 .controls button {
