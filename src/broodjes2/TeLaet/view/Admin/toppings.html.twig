@@ -1,21 +1,34 @@
-{% set toppings = vars.toppings %}
+{% extends 'base.html.twig' %}
 
-<div id="topping-panel">
-  <div id="toppings">
-    {% for topping in toppings %}
-      <div class="topping {{ cycle(['even','odd'],loop.index) }}">      
-        <span class="btn btn-danger btn-small" ><a href="#"> X </a></span>
-        <span class="floatright topping" data-toppingid="{{ topping.id }}"> &euro; {{ (topping.price / 100)|number_format(2) }}</span>
-        <span>{{ topping.name }}</span>
-      </div>  
-    {% endfor %}
-  </div>
+{% block nav_menu %}
+  {{ parent() }}
+  {% set app = globals.app %}
+  {% include 'Admin/admin.menu.l2.html.twig' %}
+{% endblock nav_menu %}
 
-  <div class="controls">
-    <input type="text" id="tname" name="tname" />
-    <input type="text" id="tprice" name="tprioe" />
-    <div class="form-group">
-      <button class="form-control btn-success" type="button" name="addtopping" id="addtopping">Add topping</button>
+{% block content %}
+  {% set app = globals.app %}
+  <h1 class="header">Topping management</h1>
+  <div id="topping-panel">
+    <div id="toppings">
+      {% for topping in toppings %}
+        <div class="topping {{ cycle(['even','odd'],loop.index) }}">      
+          <a href="{{ app.urlFor('admin_topping_remove', {'id': topping.id }) }}"><span class="glyphicon glyphicon-remove" ></span></a>
+          <span class="floatright topping price" data-toppingid="{{ topping.id }}"> &euro; {{ (topping.price / 100)|number_format(2) }}</span>
+          <span>{{ topping.name }}</span>
+        </div>  
+      {% endfor %}
+    </div>
+
+    {% set app = globals.app %}
+    <div class="controls">
+      <form action="{{ app.urlFor('admin_topping_add') }}" method="post">
+        <div class="form-group">
+          <input type="text" id="name" name="name" />
+          <input type="text" id="price" name="price" />
+        </div>
+        <input class="form-control btn-action" type="submit" id="submit" name="submit" value="Add topping" />
+      </form>
     </div>
   </div>
-</div>
+{% endblock content %}

@@ -86,5 +86,26 @@ class BreadService extends Service {
       return null;
     }
   }
+  
+  public function fetchAllToppings() {
+    $em = $this->getEntityManager();
+    $repo = $em->getRepository(Entities::TOPPING);
+    $toppings = $repo->findAll();
+    return $toppings;
+  }
+  
+  public function addTopping($app) {
+    $topping_val = new ToppingValidation($app, $this->getEntityManager());
+    if ($topping_val->validate()) {
+      $topping = new Topping();
+      $name_capped = ucwords($app->request->post('name'));
+      $topping->setName($name_capped);
+      $topping->setPrice($app->request->post('price') * 100);
+      $this->store($topping);
+      return false;
+    } else {
+      return $topping_val->getErrors();
+    }
+  }
 
 }

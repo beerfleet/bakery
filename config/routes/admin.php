@@ -24,9 +24,18 @@ $app->get('/admin/bread/remove/:id', function($id) use ($contr) {
   $contr->removeBread($id);
 })->name('admin_bread_remove');
 
-
 /* toppings */
+$app->get('/admin/toppings', function() use ($contr){
+  $contr->addToppingsPage();
+})->name('admin_manage_toppings');
 
+$app->post('/admin/topping/add', function() use ($contr){
+  $contr->addToppingProcess();
+})->name('admin_topping_add');
+
+$app->get('/admin/topping/remove/:id', function($id) use ($contr) {
+  //$contr->removeTopping($id);
+})->name('admin_topping_remove');
 
 /* users */
 $app->get('/admin/users', function() use ($contr){

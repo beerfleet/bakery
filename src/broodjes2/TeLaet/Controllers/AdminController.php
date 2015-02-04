@@ -33,7 +33,6 @@ class AdminController extends Controller {
   }
 
   /* breads */
-
   public function addBreadPage() {
     $app = $this->getApp();
     if ($this->isUserAdmin()) {
@@ -75,9 +74,34 @@ class AdminController extends Controller {
       $app->redirectTo('main_page');
     }
   }
-
   // breads
 
+  /* toppings */
+  public function addToppingsPage() {
+    $app = $this->getApp();
+    if ($this->isUserAdmin()) {
+      $bread_srv = new BreadService($this->getEntityManager());
+      $toppings = $bread_srv->fetchAllToppings();
+      $this->getApp()->render('Admin/toppings.html.twig', array('globals' => $this->getGlobals(), 'toppings' => $toppings));
+    } else {
+      $app->flash('error', 'Unauthorized action');
+      $app->redirectTo('main_page');
+    }
+  }
+  
+  public function addToppingProcess() {
+    $bread_srv = new BreadService($this->getEntityManager());
+    $errors = $bread_srv->addTopping($this->getApp());
+    $app = $this->getApp();
+    if (false === $errors) {
+      $app->flash('info', $app->request->post('name') . ' added');
+    } else {
+      $app->flash('errors', $errors);
+    }
+    $app->redirectTo('admin_manage_breads');
+  }
+  // toppings
+  
   /* users */
   public function listAllUsers() {
     $app = $this->getApp();
