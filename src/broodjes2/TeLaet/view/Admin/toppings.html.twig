@@ -12,9 +12,11 @@
   <div id="topping-panel">
     <div id="toppings">
       {% for topping in toppings %}
-        <div class="topping {{ cycle(['even','odd'],loop.index) }}">      
-          <a href="{{ app.urlFor('admin_topping_remove', {'id': topping.id }) }}"><span class="glyphicon glyphicon-remove" ></span></a>
-          <span class="floatright topping price" data-toppingid="{{ topping.id }}"> &euro; {{ (topping.price / 100)|number_format(2) }}</span>
+        <div class="topping {{ cycle(['even','odd'],loop.index) }}">  
+          {# {{ app.urlFor('admin_topping_edit', {'id': topping.id }) }} #}
+          <a href="#"><span class="glyphicon glyphicon-edit" ></span></a>
+          <a class="floatright pad-right-6" href="{{ app.urlFor('admin_topping_remove', {'id': topping.id }) }}"><span class="glyphicon glyphicon-remove" ></span></a>          
+          <span class="floatright topping pad-right-6" data-toppingid="{{ topping.id }}"> &euro; {{ (topping.price / 100)|number_format(2) }}</span>
           <span>{{ topping.name }}</span>
         </div>  
       {% endfor %}
