@@ -3,6 +3,7 @@
 namespace broodjes2\TeLaet\Controllers;
 
 use Slim\Slim;
+use Slim\Route;
 use broodjes2\TeLaet\Controllers\Controller;
 
 /**
@@ -31,7 +32,8 @@ class HomepageController extends Controller {
   public function simplifiedRoutes($routes) {
     $simple = array();
     foreach ($routes as $route) {
-      $simple[$route->getName()] = $route->getPattern();
+      /* @var $route Route */
+      $simple[$route->getName()] = array('pattern' => $route->getPattern(), 'methods' => $route->getHttpMethods());      
     }
     return $simple;
   }

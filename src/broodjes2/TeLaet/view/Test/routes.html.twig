@@ -14,6 +14,7 @@
     <table id="route-tbl" class="table table-bordered table-striped">
       <thead>
         <tr>
+          <th>Method</th>
           <th>Route name</th>
           <th>Route pattern</th>
         </tr>
@@ -21,8 +22,9 @@
       <tbody>
         {% for name, route in routes %}
           <tr>
+            <td>{% for method in route.methods  %} {{ method }}{% endfor %}</td>
             <td>{{ name }}</td>
-            <td>{{ route }}</td>
+            <td>{{ route.pattern }}</td>
           </tr>
         {% endfor %}
       </tbody>
