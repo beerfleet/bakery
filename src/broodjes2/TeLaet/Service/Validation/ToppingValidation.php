@@ -19,7 +19,16 @@ class ToppingValidation extends Validation {
       $name = $app->request->post('name');
       $repo = $em->getRepository(Entities::TOPPING);
       $result = $repo->findBy(array('name' => $name));
-      return count($result) < 1;
+      $post_id = $app->request->post('id');      
+      if (isset($post_id)) {
+        if (count($result) > 0 && $result[0]->getId() != $post_id) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return count($result) < 1;
+      }
     }, 'already exists');
     
     parent::__construct($app, $em);

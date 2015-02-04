@@ -36,6 +36,13 @@ class BreadService extends Service {
     $bread = $repo->find($id);
     return $bread;
   }
+  
+  public function findTopping($id) {
+    $em = $this->getEntityManager();
+    $repo = $em->getRepository(Entities::TOPPING);
+    $topping = $repo->find($id);
+    return $topping;
+  }
 
   public function validateBread($app) {
     $val = new PriceableValidation($app, $this->em, Entities::BREAD);
@@ -147,6 +154,25 @@ class BreadService extends Service {
       return $toppping;
     } else {
       return null;
+    }
+  }
+  
+  public function editTopping($app) {
+    $em = $this->getEntityManager();
+    $repo = $em->getRepository(Entities::TOPPING);
+    $val = new ToppingValidation($app, $em);
+    if ($val->validate()) {
+      /* @var $bread Bread */
+      $topping = $repo->find($app->request->post('id'));
+      $name = $app->request->post('name');
+      $price= $app->request->post('price');
+      $topping->setName( ucwords($name));
+      $topping->setPrice($price * 100);
+      $em->merge($topping);
+      $em->flush();
+      return false;
+    } else {
+      return $val->getErrors();
     }
   }
 

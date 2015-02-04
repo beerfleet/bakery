@@ -46,6 +46,15 @@ $app->get('/admin/topping/remove/:id', function($id) use ($contr) {
   $contr->removeTopping($id);
 })->name('admin_topping_remove');
 
+$app->get('/admin/topping/edit/:id', function($id) use ($contr) {
+  $contr->editTopping($id);
+})->name('admin_topping_edit');
+
+$app->post('/admin/topping/edit/process', function() use ($contr) {
+  $contr->editToppingProcess();
+})->name('admin_topping_edit_process');
+
+
 /* users */
 $app->get('/admin/users', function() use ($contr){
   $contr->listAllUsers();

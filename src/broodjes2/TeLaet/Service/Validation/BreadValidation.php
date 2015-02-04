@@ -19,13 +19,10 @@ class BreadValidation extends Validation {
     Validator::addRule('unique_name', function($field, $value, array $params) use ($em, $app) {
       $name = $app->request->post('name');
       $repo = $em->getRepository(Entities::BREAD);
-      $result = $repo->findBy(array('name' => $name));
-      /* @var $bread Bread */      
-
-      $post_id = $app->request->post('id');
-      
+      $result = $repo->findBy(array('name' => $name));           
+      $post_id = $app->request->post('id');      
       if (isset($post_id)) {
-        if (isset($result) && $result[0]->getId() != $post_id) {
+        if (count($result) > 0 && $result[0]->getId() != $post_id) {
           return false;
         } else {
           return true;
