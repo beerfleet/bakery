@@ -100,6 +100,24 @@ class AdminController extends Controller {
     }
     $app->redirectTo('admin_manage_breads');
   }
+  
+  public function removeTopping($id) {
+    $app = $this->getApp();
+    if ($this->isUserAdmin()) {
+      $topping_srv = new BreadService($this->getEntityManager());
+      $topping = $topping_srv->removeToppingById($id);
+      if (isset($topping)) {
+        $app->flash('info', 'Removed ' . $topping->getName());
+        $app->redirectTo('admin_manage_breads');
+      } else {
+        $app->flash('error', 'Invalid operation.');
+        $app->redirectTo('admin_manage_breads');
+      }
+    } else {
+      $app->flash('error', 'Unauthorized action');
+      $app->redirectTo('main_page');
+    }
+  }
   // toppings
   
   /* users */

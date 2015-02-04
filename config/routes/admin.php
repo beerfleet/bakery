@@ -34,7 +34,7 @@ $app->post('/admin/topping/add', function() use ($contr){
 })->name('admin_topping_add');
 
 $app->get('/admin/topping/remove/:id', function($id) use ($contr) {
-  //$contr->removeTopping($id);
+  $contr->removeTopping($id);
 })->name('admin_topping_remove');
 
 /* users */

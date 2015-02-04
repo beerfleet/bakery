@@ -107,5 +107,19 @@ class BreadService extends Service {
       return $topping_val->getErrors();
     }
   }
+  
+  public function removeToppingById($id) {
+    /* @var $em EntityManager */
+    $em = $this->getEntityManager();
+    $repo = $em->getRepository(Entities::TOPPING);
+    $toppping = $repo->find($id);
+    if ($toppping != null) {
+      $em->remove($toppping);
+      $em->flush();
+      return $toppping;
+    } else {
+      return null;
+    }
+  }
 
 }
