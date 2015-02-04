@@ -59,18 +59,18 @@
 
 #header {
   /*background-color: #fff1cd;*/
-  background-color: #291B10;
+  background-color: #BEA884;
   /*background-image: url('../img/header_bg.jpg');*/
   height: 120px;
 }
 
 #head {
-  height: 120px;
-  background-image: url(../img/header_bg.jpg);
+  height: 120px;  
+  
 }
 
 #header h1 {
-  color: #835E29;
+  color: #BEA884;
   font-family: HeaderFont;
   font-size: 6em;
   /*visibility: hidden;*/
@@ -105,7 +105,9 @@ li.active2 {
 #bread-panel,
 #topping-panel {  
   border-radius: 5px;
-  background-color: #6A061B;
+  /*background-color: #6A061B;*/
+  background-color: #D3E1FA;
+
   padding: 6px;  
   
 }
@@ -116,11 +118,11 @@ li.active2 {
   padding-left: 5px;
   margin-bottom: 5px;
 }
-.bread .price {
+.pad-right-6 {
   padding-right: 6px;
 }
 
- .controls {
+.controls {
   margin-top: 6px;  
 }
 .controls button {
@@ -142,8 +144,14 @@ li.active2 {
   height: 60px;
   padding-top: 10px;    
   padding-left: 12px;
-  background-color: #DDDDDD;
+  background-color: #BEA884;
   font-size: 1.9em;
+}
+.subtitle {
+  border-bottom: 1px solid #e3e3e3;
+}
+h2 {
+  font-size: 1.75em;
 }
 
 /* fixed footer */

@@ -3,6 +3,7 @@
 namespace broodjes2\TeLaet\Service\Validation;
 
 use broodjes2\TeLaet\Service\Validation\Validation;
+use broodjes2\TeLaet\Entities\Constants\Entities;
 use Valitron\Validator;
 
 /**
@@ -12,13 +13,22 @@ use Valitron\Validator;
  */
 class ToppingValidation extends Validation {
 
-  public function __construct($app, $em, $repo) {
+  public function __construct($app, $em) {
     
-    Validator::addRule('unique_name', function($field, $value, array $params) use ($em, $app, $repo) {
+    Validator::addRule('unique_name', function($field, $value, array $params) use ($em, $app) {
       $name = $app->request->post('name');
-      $repo = $em->getRepository($repo);
+      $repo = $em->getRepository(Entities::TOPPING);
       $result = $repo->findBy(array('name' => $name));
-      return count($result) < 1;
+      $post_id = $app->request->post('id');      
+      if (isset($post_id)) {
+        if (count($result) > 0 && $result[0]->getId() != $post_id) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return count($result) < 1;
+      }
     }, 'already exists');
     
     parent::__construct($app, $em);

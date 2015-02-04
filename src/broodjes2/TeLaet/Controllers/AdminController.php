@@ -76,7 +76,113 @@ class AdminController extends Controller {
     }
   }
 
+  public function editBread($id) {
+    $app = $this->getApp();
+    if ($this->isUserAdmin()) {
+      $bread_srv = new BreadService($this->getEntityManager());
+      $bread = $bread_srv->findBread($id);
+      if (isset($bread)) {
+        $app->render('Admin/edit_bread.html.twig', array('globals' => $this->getGlobals(), 'bread' => $bread));
+      } else {
+        $app->flash('error', 'Invalid operation.');
+        $app->redirectTo('admin_manage_breads');
+      }
+    } else {
+      $app->flash('error', 'Unauthorized action');
+      $app->redirectTo('main_page');
+    }
+  }
+
+  public function editBreadProcess() {
+    $app = $this->getApp();
+    $bread_srv = new BreadService($this->getEntityManager());
+    $errors = $bread_srv->editBread($app);
+    if (false === $errors) {
+      $app->flash('info', 'Bread updated');
+      $app->redirectTo('admin_manage_breads');
+    } else {
+      $app->flash('errors', $errors);
+      /* @var $app Slim */
+      $app->redirectTo('admin_bread_edit', array('id' => $app->request->post('id')));
+    }
+  }
+
   // breads
+
+  /* toppings */
+  public function addToppingsPage() {
+    $app = $this->getApp();
+    if ($this->isUserAdmin()) {
+      $bread_srv = new BreadService($this->getEntityManager());
+      $toppings = $bread_srv->fetchAllToppings();
+      $this->getApp()->render('Admin/toppings.html.twig', array('globals' => $this->getGlobals(), 'toppings' => $toppings));
+    } else {
+      $app->flash('error', 'Unauthorized action');
+      $app->redirectTo('main_page');
+    }
+  }
+
+  public function addToppingProcess() {
+    $bread_srv = new BreadService($this->getEntityManager());
+    $errors = $bread_srv->addTopping($this->getApp());
+    $app = $this->getApp();
+    if (false === $errors) {
+      $app->flash('info', $app->request->post('name') . ' added');
+    } else {
+      $app->flash('errors', $errors);
+    }
+    $app->redirectTo('admin_manage_toppings');
+  }
+
+  public function removeTopping($id) {
+    $app = $this->getApp();
+    if ($this->isUserAdmin()) {
+      $topping_srv = new BreadService($this->getEntityManager());
+      $topping = $topping_srv->removeToppingById($id);
+      if (isset($topping)) {
+        $app->flash('info', 'Removed ' . $topping->getName());
+        $app->redirectTo('admin_manage_breads');
+      } else {
+        $app->flash('error', 'Invalid operation.');
+        $app->redirectTo('admin_manage_breads');
+      }
+    } else {
+      $app->flash('error', 'Unauthorized action');
+      $app->redirectTo('main_page');
+    }
+  }
+
+  public function editTopping($id) {
+    $app = $this->getApp();
+    if ($this->isUserAdmin()) {
+      $bread_srv = new BreadService($this->getEntityManager());
+      $topping = $bread_srv->findTopping($id);
+      if (isset($topping)) {
+        $app->render('Admin/edit_topping.html.twig', array('globals' => $this->getGlobals(), 'topping' => $topping));
+      } else {
+        $app->flash('error', 'Invalid operation.');
+        $app->redirectTo('admin_manage_toppings');
+      }
+    } else {
+      $app->flash('error', 'Unauthorized action');
+      $app->redirectTo('main_page');
+    }
+  }
+  
+  public function editToppingProcess() {
+    $app = $this->getApp();
+    $bread_srv = new BreadService($this->getEntityManager());
+    $errors = $bread_srv->editTopping($app);
+    if (false === $errors) {
+      $app->flash('info', 'Topping updated');
+      $app->redirectTo('admin_manage_toppings');
+    } else {
+      $app->flash('errors', $errors);
+      /* @var $app Slim */
+      $app->redirectTo('admin_topping_edit', array('id' => $app->request->post('id')));
+    }
+  }
+  // toppings
 
   /* users */
   public function listAllUsers() {

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block nav_menu %}
+  {{ parent() }}
+  {% set app = globals.app %}
+  {% include 'Admin/admin.menu.l2.html.twig' %}
+{% endblock nav_menu %}
+
+{% block content %}
+  {% set app = globals.app %}
+  <h1 class="header">Edit topping</h1>
+  <form class="bodyBG" action="{{ app.urlFor('admin_topping_edit_process') }}" method="post">
+    
+    <input type="hidden" id="id" name="id" value="{{ topping.id }}" />
+    
+    <div class="form-group">
+      <label for="name">Topping</label>
+      <input class="form-control" type="text" id="name" name="name" value="{{ topping.name }}" />
+    </div>
+    
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input class="form-control" type="text" id="price" name="price" value="{{ (topping.price / 100)|number_format(2) }}" />
+    </div>
+    
+    <input class="form-control btn btn-info btn-action" type="submit" id="submit" name="submit" value="Update" />
+  </form>
+{% endblock content %}
