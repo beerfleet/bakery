@@ -48,7 +48,8 @@ class BreadService extends Service {
     $bread_val = new BreadValidation($app, $this->getEntityManager());
     if ($bread_val->validate()) {
       $bread = new Bread();
-      $bread->setName($app->request->post('name'));
+      $name_capped = ucwords($app->request->post('name'));
+      $bread->setName($name_capped);
       $bread->setPrice($app->request->post('price') * 100);
       $this->store($bread);
       return false;
