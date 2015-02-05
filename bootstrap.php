@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
 use Slim\Slim;
 use Slim\Extras\Views\Twig;
 
+
 // ---------------->  YAML
 $namespaces = $config['yaml']['namespaces'];
 $driver = new SimplifiedYamlDriver($namespaces);
@@ -30,3 +31,8 @@ $view->twigExtensions = $config['slim_ext'];
 
 $app = new Slim(array( 'view' => $view ));
 $app->config($config['slim']);
+
+/* @var $env Twig_Environment */
+//$env = $view->getEnvironment();
+//$env->setcache("Z:\xampp 5.5.19\htdocs\broodjes_v2\cache");
+$env->addGlobal('app', $app);
