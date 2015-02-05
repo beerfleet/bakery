@@ -26,10 +26,10 @@
         {% for user in users %}
           <tr>
             <td>
-              <span class="glyphicon glyphicon-edit"></span>
               <a title="Edit {{ user.username }}" href="{{ app.urlFor('admin_user_edit', {'id': user.id}) }}">
-                {{ user.username }}
+                <span class="glyphicon glyphicon-edit"></span>
               </a>
+              {{ user.username }}
             </td>
             <td>{{ user.surname }}</td>
             <td>{{ user.firstName }}</td>
