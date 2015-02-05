@@ -29,10 +29,10 @@ $view = new Twig();
 $view->twigOptions = $config['slim_twig'];
 $view->twigExtensions = $config['slim_ext'];
 
+
 $app = new Slim(array( 'view' => $view ));
 $app->config($config['slim']);
 
 /* @var $env Twig_Environment */
-//$env = $view->getEnvironment();
-//$env->setcache("Z:\xampp 5.5.19\htdocs\broodjes_v2\cache");
-$env->addGlobal('app', $app);
+$view->set('app', $app);
+
