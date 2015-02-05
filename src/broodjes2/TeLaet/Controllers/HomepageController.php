@@ -42,7 +42,7 @@ class HomepageController extends Controller {
     $app = $this->getApp();
     $routes = $app->router->getNamedRoutes();
     $simple = $this->simplifiedRoutes($routes);
-    $app->render('Test\routes.html.twig', array('globals' => $this->getGlobals(), 'routes' => $simple));
+    $app->render('Test\routes.html.twig', array('routes' => $simple));
   }
 
 }
