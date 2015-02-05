@@ -25,7 +25,7 @@ class AdminController extends Controller {
     $app = $this->getApp();
     if ($this->isUserAdmin()) {
       $app = $this->getApp();
-      $app->render('Admin\main_admin.html.twig', array('globals' => $this->getGlobals()));
+      $app->render('Admin\main_admin.html.twig');
     } else {
       $app->flash('error', 'Unauthorized action');
       $app->redirectTo('main_page');
@@ -39,7 +39,7 @@ class AdminController extends Controller {
     if ($this->isUserAdmin()) {
       $bread_srv = new BreadService($this->getEntityManager());
       $breads = $bread_srv->fetchAllBreads();
-      $this->getApp()->render('Admin/breads.html.twig', array('globals' => $this->getGlobals(), 'breads' => $breads));
+      $this->getApp()->render('Admin/breads.html.twig', array('breads' => $breads));
     } else {
       $app->flash('error', 'Unauthorized action');
       $app->redirectTo('main_page');
@@ -82,7 +82,7 @@ class AdminController extends Controller {
       $bread_srv = new BreadService($this->getEntityManager());
       $bread = $bread_srv->findBread($id);
       if (isset($bread)) {
-        $app->render('Admin/edit_bread.html.twig', array('globals' => $this->getGlobals(), 'bread' => $bread));
+        $app->render('Admin/edit_bread.html.twig', array('bread' => $bread));
       } else {
         $app->flash('error', 'Invalid operation.');
         $app->redirectTo('admin_manage_breads');
@@ -115,7 +115,7 @@ class AdminController extends Controller {
     if ($this->isUserAdmin()) {
       $bread_srv = new BreadService($this->getEntityManager());
       $toppings = $bread_srv->fetchAllToppings();
-      $this->getApp()->render('Admin/toppings.html.twig', array('globals' => $this->getGlobals(), 'toppings' => $toppings));
+      $this->getApp()->render('Admin/toppings.html.twig', array('toppings' => $toppings));
     } else {
       $app->flash('error', 'Unauthorized action');
       $app->redirectTo('main_page');
@@ -158,7 +158,7 @@ class AdminController extends Controller {
       $bread_srv = new BreadService($this->getEntityManager());
       $topping = $bread_srv->findTopping($id);
       if (isset($topping)) {
-        $app->render('Admin/edit_topping.html.twig', array('globals' => $this->getGlobals(), 'topping' => $topping));
+        $app->render('Admin/edit_topping.html.twig', array('topping' => $topping));
       } else {
         $app->flash('error', 'Invalid operation.');
         $app->redirectTo('admin_manage_toppings');
@@ -187,7 +187,7 @@ class AdminController extends Controller {
   /* users */
   public function listAllUsers() {
     $app = $this->getApp();
-    $app->render('Admin/user_list.html.twig', array('globals' => $this->getGlobals()));
+    $app->render('Admin/user_list.html.twig', array());
   }
 
   //users

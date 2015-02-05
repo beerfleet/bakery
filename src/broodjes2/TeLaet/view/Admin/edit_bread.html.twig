@@ -2,12 +2,10 @@
 
 {% block nav_menu %}
   {{ parent() }}
-  {% set app = globals.app %}
   {% include 'Admin/admin.menu.l2.html.twig' %}
 {% endblock nav_menu %}
 
 {% block content %}
-  {% set app = globals.app %}
   <h1 class="header">Edit bread</h1>
   <form class="bodyBG" action="{{ app.urlFor('admin_bread_edit_process') }}" method="post">
     

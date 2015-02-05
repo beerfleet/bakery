@@ -2,13 +2,13 @@
   <div class="menutitle">ADMIN</div>
   <div class="container">    
     <ul class="nav nav-pills">       
-      <li {% if app.urlFor('admin_manage_breads') == globals.path %} class="active2" {% endif %}>
+      <li {% if app.urlFor('admin_manage_breads') == path %} class="active2" {% endif %}>
         <a href="{{ app.urlFor('admin_manage_breads') }}">Breads</a>
       </li>
-      <li {% if app.urlFor('admin_manage_toppings') == globals.path %} class="active2" {% endif %}>
+      <li {% if app.urlFor('admin_manage_toppings') == path %} class="active2" {% endif %}>
         <a href="{{ app.urlFor('admin_manage_toppings') }}">Toppings</a>
       </li>
-      <li {% if app.urlFor('admin_user_list') == globals.path %} class="active2" {% endif %}>
+      <li {% if app.urlFor('admin_user_list') == path %} class="active2" {% endif %}>
         <a href="{{ app.urlFor('admin_user_list') }}">Users</a>
       </li>
     </ul>
