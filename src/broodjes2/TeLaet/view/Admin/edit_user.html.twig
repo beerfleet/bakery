@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block nav_menu %}
+  {{ parent() }}
+  {% include 'Admin/admin.menu.l2.html.twig' %}
+{% endblock nav_menu %}
+
 {% block content %}
   <h1 class="header">Edit Use data</h1>
   <form class="bodyBG" action="{{ app.urlFor('admin_user_edit_process') }}" method="post">
@@ -41,3 +46,15 @@
     <input class="form-control btn-action" type="submit" id="submit" name="submit" value="Submit" />
   </form>
 {% endblock content %}
+
+{% block extrajs %}
+  <script type="text/javascript">
+    $(function() {
+      $('ul>li>a').each(function() {
+        if ($(this).text() == "Users") {
+          $(this).parent().addClass("active2");
+        }
+      });
+    });
+  </script>
+{% endblock extrajs %}

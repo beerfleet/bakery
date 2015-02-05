@@ -5,8 +5,8 @@
 
 /* MISC */
 .floatright {float: right}
-.even {background-color: #fffae3}
-.odd {background-color: #eadf9e;}
+.even, .table-striped > tbody > tr:nth-child(2n) {background-color: #fffae3}
+.odd, .table-striped > tbody > tr:nth-child(2n+1) {background-color: #eadf9e;}
 .btn-small {
   padding-top: 0;
   padding-bottom: 0;

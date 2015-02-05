@@ -24,3 +24,15 @@
     <input class="form-control btn btn-info btn-action" type="submit" id="submit" name="submit" value="Update" />
   </form>
 {% endblock content %}
+
+{% block extrajs %}
+  <script type="text/javascript">
+    $(function() {
+      $('ul>li>a').each(function() {
+        if ($(this).text() == "Breads") {
+          $(this).parent().addClass("active2");
+        }
+      });
+    });
+  </script>
+{% endblock extrajs %}
