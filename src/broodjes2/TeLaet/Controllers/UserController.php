@@ -27,7 +27,7 @@ class UserController extends Controller {
     /* @var $app Slim */
     $app = $this->getApp();    
     $postcodes = $this->user_srv->fetchPostcodes();
-    $app->render('User\register.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes));
+    $app->render('User\register.html.twig', array('postcodes' => $postcodes));
   }  
   
   public function processRegistration() {
@@ -41,8 +41,8 @@ class UserController extends Controller {
       $app->redirectTo('main_page');
     } else {
       $errors = $validated;
-      $app->flash('errors', $errors);
-      $app->render('User\register.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $this->user_srv->fetchPostcodes()));
+      $app->flashNow('errors', $errors);
+      $app->render('User\register.html.twig', array('postcodes' => $this->user_srv->fetchPostcodes()));
     }
   }
   
@@ -60,9 +60,8 @@ class UserController extends Controller {
   
   /* logon */
   public function logonPage() {
-    $globals = $this->getGlobals();
     $app = $this->getApp();
-    $app->render('User\logon.html.twig', array('globals' => $globals));
+    $app->render('User\logon.html.twig');
   }
   
   public function verifyCredentials() {
@@ -87,7 +86,7 @@ class UserController extends Controller {
   /* password reset */
   public function passwordResetRequest() {
     $app = $this->getApp();
-    $app->render('User\password_reset_request.html.twig', array('globals' => $this->getGlobals()));
+    $app->render('User\password_reset_request.html.twig');
   }
   
   public function passwordResetProcess() {
@@ -103,7 +102,7 @@ class UserController extends Controller {
     $user = $srv->verifyToken($token);
     $app = $this->getApp();
     if (isset($user)) {
-      $app->render('User\password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user->getId()));
+      $app->render('User\password_reset.html.twig', array('user_id' => $user->getId()));
     } else {
       $app->redirectTo('error_404');
     }
@@ -118,7 +117,7 @@ class UserController extends Controller {
       $app->redirectTo('main_page');
     } else {      
       $user_id = $app->request->post('user_id');
-      $app->render('User\password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user_id, 'errors' => $processed ));
+      $app->render('User\password_reset.html.twig', array('user_id' => $user_id, 'errors' => $processed ));
     }
   }
   
