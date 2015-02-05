@@ -5,6 +5,7 @@ namespace broodjes2\TeLaet\Controllers;
 use broodjes2\TeLaet\Controllers\Controller;
 use broodjes2\TeLaet\Service\Admin\AdminService;
 use broodjes2\TeLaet\Service\Bread\BreadService;
+use broodjes2\TeLaet\Service\User\UserService;
 use Slim\Slim;
 
 /**
@@ -168,7 +169,7 @@ class AdminController extends Controller {
       $app->redirectTo('main_page');
     }
   }
-  
+
   public function editToppingProcess() {
     $app = $this->getApp();
     $bread_srv = new BreadService($this->getEntityManager());
@@ -182,12 +183,45 @@ class AdminController extends Controller {
       $app->redirectTo('admin_topping_edit', array('id' => $app->request->post('id')));
     }
   }
+
   // toppings
 
   /* users */
   public function listAllUsers() {
     $app = $this->getApp();
-    $app->render('Admin/user_list.html.twig', array());
+    $srv = new UserService($this->getEntityManager());
+    $users = $srv->fetchAllUsers();
+    $app->render('Admin/user_list.html.twig', array('users' => $users));
+  }
+
+  public function editUser($id) {
+    if ($this->isUserAdmin()) {
+      $app = $this->getApp();
+      $srv = new UserService($this->getEntityManager());
+      $user = $srv->fetchUserById($id);
+      if (isset($user)) {
+        $app->render('Admin/edit_user.html.twig', array('user' => $user, 'postcodes' => $srv->fetchPostcodes()));
+      } else {
+        $app->flash('error', 'Invalid operation.');
+        $app->redirectTo('admin_user_list');
+      }
+    } else {
+      $app->flash('error', 'Unauthorized action');
+      $app->redirectTo('main_page');
+    }
+  }
+
+  public function editUserProcess() {
+    $app = $this->getApp();
+    $srv = new UserService($this->getEntityManager());
+    $errors = $srv->processEditUser($app);
+    if (null === $errors) {
+      $app->flash('info', $app->request->post('username') .  ' is updated.');
+      $app->redirectTo('admin_user_list');
+    } else {
+      $app->flash('errors', $errors);
+      $app->redirectTo('admin_user_edit', array('id' => $app->request->post('id')));
+    }
   }
 
   //users

@@ -59,3 +59,12 @@ $app->post('/admin/topping/edit/process', function() use ($contr) {
 $app->get('/admin/users', function() use ($contr){
   $contr->listAllUsers();
 })->name('admin_user_list');
+
+$app->get('/admin/user/edit/:id', function($id) use ($contr){
+  $contr->editUser($id);
+})->name('admin_user_edit');
+
+$app->post('/admin/user/edit', function() use ($contr){
+  $contr->editUserProcess();
+})->name('admin_user_edit_process');
+
