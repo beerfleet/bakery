@@ -26,10 +26,7 @@ abstract class Controller {
    */
   function __construct($em, $app) {
     $this->em = $em;
-    $this->app = $app;
-    if (session_status() == PHP_SESSION_NONE) {
-      session_start();
-    }
+    $this->app = $app;    
   }
   
   public function getEntityManager() {

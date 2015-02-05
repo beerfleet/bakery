@@ -20,7 +20,7 @@ class HomepageController extends Controller {
   public function homepage() {
     /* @var $app Slim */
     $app = $this->getApp();
-    $app->render('homepage.html.twig', array('globals' => $this->getGlobals()));
+    $app->render('homepage.html.twig');
   }
 
   public function notFound() {
