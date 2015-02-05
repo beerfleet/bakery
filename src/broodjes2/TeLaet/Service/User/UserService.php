@@ -131,7 +131,7 @@ class UserService {
     $user = $repo->findOneBy(array('email' => $email));
     if (isset($user)) {
       /* @var $user User */
-      $user->setPasswordToken();
+      $user->setResetToken();
       $em->merge($user);
       $em->flush();
       $this->mailResetToken($user);
@@ -141,7 +141,7 @@ class UserService {
   public function mailResetToken(User $user) {
     $subject = 'Reset Token Requested';
     $message = "Dear Mr " . $user->getSurname() . ".\n" .
-        "Click http://" . $_SERVER['HTTP_HOST'] . "/reset/" . $user->getPasswordToken();
+        "Click http://" . $_SERVER['HTTP_HOST'] . "/reset/" . $user->getResetToken();
     $header = "From: noreply@janvanbiervliet.com";
     $this->mailUser($user, $subject, $message, $header);
   }
@@ -150,9 +150,9 @@ class UserService {
     $em = $this->em;
     $repo = $em->getRepository(Entities::USER);
     /* @var $user User */
-    $user = $repo->findUserByToken($token);    
+    $user = $repo->findUserByResetToken($token);    
     if (isset($user)) {      
-      $user->resetPasswordToken();
+      $user->resetResetToken();
       $em->merge($user);
       $em->flush();
       return $user;

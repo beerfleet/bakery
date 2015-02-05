@@ -97,7 +97,7 @@ class UserController extends Controller {
     $app->redirectTo('main_page');
   }
   
-  public function processToken($token) {    
+  public function processResetToken($token) {    
     $srv = $this->user_srv;
     $user = $srv->verifyToken($token);
     $app = $this->getApp();
