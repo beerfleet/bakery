@@ -26,6 +26,7 @@ CREATE TABLE `bread` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
+  `image` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
@@ -37,7 +38,7 @@ CREATE TABLE `bread` (
 
 LOCK TABLES `bread` WRITE;
 /*!40000 ALTER TABLE `bread` DISABLE KEYS */;
-INSERT INTO `bread` (`id`, `name`, `price`) VALUES (1,'Baguette',225),(3,'Ciabatta',300),(4,'Bread Bowl',250),(5,'Enanito',175),(38,'Waldkorn',275),(42,'Piccolo',125),(43,'Paninni',225);
+INSERT INTO `bread` (`id`, `name`, `price`, `image`) VALUES (1,'Baguette',225,'img/Breads/baguette.jpg'),(3,'Ciabatta',300,'img/Breads/ciabatta.jpg'),(4,'Bread Bowl',250,'img/Breads/bowl.jpg'),(5,'Enanito',175,NULL),(38,'Waldkorn',275,NULL),(42,'Piccolo',125,NULL),(43,'Paninni',225,NULL);
 /*!40000 ALTER TABLE `bread` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,6 +107,7 @@ CREATE TABLE `topping` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
+  `image` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
@@ -117,7 +119,7 @@ CREATE TABLE `topping` (
 
 LOCK TABLES `topping` WRITE;
 /*!40000 ALTER TABLE `topping` DISABLE KEYS */;
-INSERT INTO `topping` (`id`, `name`, `price`) VALUES (1,'Cabbage',25),(2,'Onions',25),(3,'Cucumber',20),(4,'Butter',10),(5,'Mayonaise',20),(6,'Ham',50),(7,'Gouda (young)',50),(14,'Mozarella',25),(15,'Feta',50);
+INSERT INTO `topping` (`id`, `name`, `price`, `image`) VALUES (1,'Cabbage',25,NULL),(2,'Onions',25,NULL),(3,'Cucumber',20,NULL),(4,'Butter',10,NULL),(5,'Mayonaise',20,NULL),(6,'Ham',50,'img/Toppings/ham.jpg'),(7,'Gouda (young)',50,NULL),(14,'Mozarella',25,NULL),(15,'Feta',50,NULL);
 /*!40000 ALTER TABLE `topping` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +158,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `username`, `email`, `first_name`, `enabled`, `password`, `last_logon`, `surname`, `address`, `password_token`, `is_admin`, `postcode_id`, `reset_token`) VALUES (1,'Jan','janvb@pandora.be','Jan',1,'$2y$10$lHZy0nvffRvS8og5N4WEmOQq0ELymn47iuG0Bt/PdweOUlNUKsMYC',NULL,'Van Biervliet','Pyckestraat 3',NULL,1,273,NULL),(2,'Reggie','reggie.donalds@cunicular.com','Reggie',1,'$2y$10$RmhQo4UDXCN41BWYCJkQ/e.iF6PqhH70b01rOjJwj1yuTrEd5iUqa',NULL,'Donalds','Schoytestraat 49',NULL,NULL,272,NULL),(4,'Peter','p.griffin@gmail.com','Peter',1,'$2y$10$0RcLbBMfd8ieQANUs8C2heIogXg.Wz1JbKW.ovKmHVId5VO1.KQ3O',NULL,'Griffin','Tulpstraat',NULL,NULL,281,NULL),(5,'roach','lacucaracha@yanopuede.com','Jakka',0,'$2y$10$MozAkxNO8LBQRhg5YgOMXeaxlwxv1eK/o40fC5UsoKTJyXjkfqs7e',NULL,'Kakkarlakka','Zwart Paardstraat 15','41fcaacff9c4e2c3077dceee08065beb669830b6c9a499018c00f9f2b14820780217c61cdca90af6dcbd1314473498f82673274f2cc4bdfcf8f2288cb870c922f2cd3f94c8764d4315a6f50339704a0f1e99a10b6d24c1d5d3fe86d527928f2693a430e1a8ca6b3aee8ad3069f1648951ed1abc98bf8b6182400079b5b3bd113',NULL,27,NULL),(6,'splitter','aaa@aaa.aaa','aaa',1,'$2y$10$LAMP/J9UUqn44mAszoc4OealJV8BzPhc.d3WQmbF254GGmqkcQ/tC',NULL,'aaa','aaa',NULL,NULL,781,NULL);
+INSERT INTO `user` (`id`, `username`, `email`, `first_name`, `enabled`, `password`, `last_logon`, `surname`, `address`, `password_token`, `is_admin`, `postcode_id`, `reset_token`) VALUES (1,'Jan','janvb@pandora.be','Jakke',1,'$2y$10$lHZy0nvffRvS8og5N4WEmOQq0ELymn47iuG0Bt/PdweOUlNUKsMYC',NULL,'Van Biervliet','Pyckestraat 3',NULL,1,270,NULL),(2,'Reggie','reggie.donalds@cunicular.com','Reggie',1,'$2y$10$RmhQo4UDXCN41BWYCJkQ/e.iF6PqhH70b01rOjJwj1yuTrEd5iUqa',NULL,'Donalds','Schoytestraat 49',NULL,NULL,272,NULL),(4,'Peter','p.griffin@gmail.com','Peter',1,'$2y$10$0RcLbBMfd8ieQANUs8C2heIogXg.Wz1JbKW.ovKmHVId5VO1.KQ3O',NULL,'Griffin','Tulpstraat',NULL,NULL,281,NULL),(5,'roach','lacucaracha@yanopuede.com','Jose',0,'$2y$10$MozAkxNO8LBQRhg5YgOMXeaxlwxv1eK/o40fC5UsoKTJyXjkfqs7e',NULL,'Rachos','Zwart Paardstraat 15','41fcaacff9c4e2c3077dceee08065beb669830b6c9a499018c00f9f2b14820780217c61cdca90af6dcbd1314473498f82673274f2cc4bdfcf8f2288cb870c922f2cd3f94c8764d4315a6f50339704a0f1e99a10b6d24c1d5d3fe86d527928f2693a430e1a8ca6b3aee8ad3069f1648951ed1abc98bf8b6182400079b5b3bd113',NULL,27,NULL),(6,'splitter','aaa@aaa.aaa','aaa',1,'$2y$10$LAMP/J9UUqn44mAszoc4OealJV8BzPhc.d3WQmbF254GGmqkcQ/tC',NULL,'aaa','aaa',NULL,NULL,772,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -169,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-05 14:09:39
+-- Dump completed on 2015-02-07 22:40:18
