@@ -189,5 +189,23 @@ class AdminService {
       throw new ImageException("Error uploading image.");
     }
   }
+  
+  public function deleteImage($full_path) {     
+    if (file_exists($full_path)) {      
+      unlink($full_path);
+    } else {
+      throw new ImageException("File does not exist");
+    }
+  }
+  
+  public function deleteBreadImage($filename) {
+    $path_to_file = Files::BREAD_IMG_DIR . '/' . $filename;
+    $this->deleteImage($path_to_file);
+  }
+  
+  public function deleteToppingImage($filename) {
+    $path_to_file = Files::TOPPING_IMG_DIR . '/' . $filename;
+    $this->deleteImage($path_to_file);
+  }
 
 }

@@ -269,6 +269,32 @@ class AdminController extends Controller {
       $app->redirectTo('admin_images_manage');
     }
   }
+
+  public function deleteBreadImg($filename) {
+    $app = $this->getApp();
+    try {
+      $srv = new AdminService($this->getEntityManager());
+      $srv->deleteBreadImage($filename);
+      $app->flash('info', $filename . ' removed');
+      $app->redirectTo('admin_images_manage');
+    } catch (ImageException $e) {
+      $app->flash('error', $e->getMessage());
+      $app->redirectTo('admin_images_manage');
+    }
+  }
+  
+  public function deleteToppingImg($filename) {
+    $app = $this->getApp();
+    try {
+      $srv = new AdminService($this->getEntityManager());
+      $srv->deleteToppingImage($filename);
+      $app->flash('info', $filename . ' removed');
+      $app->redirectTo('admin_images_manage');
+    } catch (ImageException $e) {
+      $app->flash('error', $e->getMessage());
+      $app->redirectTo('admin_images_manage');
+    }
+  }
   
   
 

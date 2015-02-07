@@ -82,3 +82,11 @@ $app->post('/admin/images/toppings/add', function() use ($contr) {
   $contr->uploadToppingsImg();
 })->name('admin_upload_toppings_image');
 
+$app->get('/admin/images/bread/:filename/delete', function($filename) use ($contr) {
+  $contr->deleteBreadImg($filename);
+})->name('admin_delete_bread_image');
+
+$app->get('/admin/images/topping/:filename/delete', function($filename) use ($contr) {
+  $contr->deleteToppingImg($filename);
+})->name('admin_delete_topping_image');
+

@@ -19,7 +19,10 @@
               <td>{{ file.name }}</td>
               <td>{{ file.extension }}</td>
               <td>{{ file.size }}</td>
-              <td><img src="../img/Breads/{{ file.fullname }}" alt="{{ file.fullname }}" width="120"/></td>
+              <td>
+                <img src="../img/Breads/{{ file.fullname }}" alt="{{ file.fullname }}" width="120"/>
+                <a class="glyphicon glyphicon-remove" href="{{ app.urlFor('admin_delete_bread_image', {'filename': file.fullname }) }}"></a>
+              </td>
             </tr>
           {% endfor %}
         </tbody>
