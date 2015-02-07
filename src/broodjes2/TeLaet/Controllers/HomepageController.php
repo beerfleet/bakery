@@ -3,6 +3,7 @@
 namespace broodjes2\TeLaet\Controllers;
 
 use Slim\Slim;
+use Slim\Route;
 use broodjes2\TeLaet\Controllers\Controller;
 
 /**
@@ -19,7 +20,7 @@ class HomepageController extends Controller {
   public function homepage() {
     /* @var $app Slim */
     $app = $this->getApp();
-    $app->render('homepage.html.twig', array('globals' => $this->getGlobals()));
+    $app->render('homepage.html.twig');
   }
 
   public function notFound() {
@@ -31,7 +32,8 @@ class HomepageController extends Controller {
   public function simplifiedRoutes($routes) {
     $simple = array();
     foreach ($routes as $route) {
-      $simple[$route->getName()] = $route->getPattern();
+      /* @var $route Route */
+      $simple[$route->getName()] = array('pattern' => $route->getPattern(), 'methods' => $route->getHttpMethods());      
     }
     return $simple;
   }
@@ -40,7 +42,7 @@ class HomepageController extends Controller {
     $app = $this->getApp();
     $routes = $app->router->getNamedRoutes();
     $simple = $this->simplifiedRoutes($routes);
-    $app->render('Test\routes.html.twig', array('globals' => $this->getGlobals(), 'routes' => $simple));
+    $app->render('Test\routes.html.twig', array('routes' => $simple));
   }
 
 }

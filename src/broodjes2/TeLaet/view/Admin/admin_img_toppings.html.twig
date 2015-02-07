@@ -1,0 +1,42 @@
+<article id="toppings">
+  <h2 class="subtitle">Toppings</h2>
+
+  {% if toppings|length > 0 %}
+    <div class="table-responsive">
+      <table id="topping-tbl" class="table table-striped" id="bread_img_tbl">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Extension</th>
+            <th>Size</th>
+            <th>Image</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for file in toppings %}
+            <tr>
+              <td>{{ file.name }}</td>
+              <td>{{ file.extension }}</td>
+              <td>{{ file.size }}</td>
+              <td>
+                <img src="../img/Toppings/{{ file.fullname }}" alt="{{ file.fullname }}" width="120"/>
+                <a class="glyphicon glyphicon-remove" href="{{ app.urlFor('admin_delete_topping_image', {'filename': file.fullname}) }}"></a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    No toppings have been added yet
+  {% endif %}
+  <form enctype="multipart/form-data" action="{{ app.urlFor('admin_upload_toppings_image') }}" method="post">
+
+    <div class="form-group">
+
+      <input type="file" id="image" name="image" />
+    </div>
+    <input class="form-control btn btn-action" type="submit" id="upload" name="upload" value="Upload Image" />
+  </form>
+</article>  

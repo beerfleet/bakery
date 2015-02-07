@@ -25,6 +25,7 @@ class User {
   private $address;
   private $is_admin;
   private $password_token;
+  private $reset_token;
 
   function __construct() {
     $this->user_likes = new ArrayCollection();
@@ -33,7 +34,6 @@ class User {
     $this->whisky_likes = new ArrayCollection();
     $this->whiskys_created = new ArrayCollection();
     $this->events_created = new ArrayCollection();
-    
   }
 
   function getId() {
@@ -83,7 +83,7 @@ class User {
   function isAdmin() {
     return $this->is_admin == 1;
   }
-  
+
   function setId($id) {
     $this->id = $id;
   }
@@ -131,9 +131,21 @@ class User {
   function resetPasswordToken() {
     $this->password_token = null;
   }
+  
+  function resetResetToken() {
+    $this->reset_token = null;
+  }
 
   function setPasswordToken() {
     $this->password_token = bin2hex(mcrypt_create_iv(128, MCRYPT_DEV_RANDOM));
+  }
+
+  function getResetToken() {
+    return $this->reset_token;
+  }
+
+  function setResetToken() {
+    $this->reset_token = bin2hex(mcrypt_create_iv(128, MCRYPT_DEV_RANDOM));
   }
 
 }

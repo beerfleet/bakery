@@ -49,5 +49,8 @@ broodjes2\TeLaet\Entities\User:
     password_token:
       type: string
       length: 256
+    reset_token:
+      type: string
+      length: 256
     is_admin:
       type: integer      

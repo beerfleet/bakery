@@ -13,23 +13,24 @@ use broodjes2\TeLaet\Entities\User;
  * @author jan van biervliet
  */
 class UserController extends Controller {
-  
+
   private $user_srv;
-  
+
   public function __construct($em, $app) {
     parent::__construct($em, $app);
     $this->user_srv = new UserService($em);
   }
-  
+
   /* registration */
-  public function register() {    
+
+  public function register() {
     $em = $this->getEntityManager();
     /* @var $app Slim */
-    $app = $this->getApp();    
+    $app = $this->getApp();
     $postcodes = $this->user_srv->fetchPostcodes();
-    $app->render('User\register.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes));
-  }  
-  
+    $app->render('User\register.html.twig', array('postcodes' => $postcodes));
+  }
+
   public function processRegistration() {
     /* @var $app Slim */
     $app = $this->getApp();
@@ -41,11 +42,11 @@ class UserController extends Controller {
       $app->redirectTo('main_page');
     } else {
       $errors = $validated;
-      $app->flash('errors', $errors);
-      $app->render('User\register.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $this->user_srv->fetchPostcodes()));
+      $app->flashNow('errors', $errors);
+      $app->render('User\register.html.twig', array('postcodes' => $this->user_srv->fetchPostcodes()));
     }
   }
-  
+
   public function verifyRegistration($token) {
     $app = $this->getApp();
     $srv = $this->user_srv;
@@ -57,14 +58,14 @@ class UserController extends Controller {
       $app->redirectTo('error_404');
     }
   }
-  
+
   /* logon */
+
   public function logonPage() {
-    $globals = $this->getGlobals();
     $app = $this->getApp();
-    $app->render('User\logon.html.twig', array('globals' => $globals));
+    $app->render('User\logon.html.twig');
   }
-  
+
   public function verifyCredentials() {
     $srv = $this->user_srv;
     $app = $this->getApp();
@@ -72,43 +73,48 @@ class UserController extends Controller {
     $user = $srv->validateCredentials($app);
     if (isset($user) && $user->isEnabled()) {
       $this->setUserLoggedOn($user->getUsername());
-      $app->redirectTo('main_page');
+      if ($user->isAdmin()) {
+        $app->redirectTo('admin_main_page');
+      } else {
+        $app->redirectTo('main_page');
+      }
     } else {
       $app->flash('error', 'Access denied.');
       $app->redirectTo('logon');
     }
   }
-  
+
   public function logoffProcess() {
     $this->logoff();
     $this->getApp()->redirectTo('main_page');
   }
-  
+
   /* password reset */
+
   public function passwordResetRequest() {
     $app = $this->getApp();
-    $app->render('User\password_reset_request.html.twig', array('globals' => $this->getGlobals()));
+    $app->render('User\password_reset_request.html.twig');
   }
-  
+
   public function passwordResetProcess() {
-    $app = $this->getApp();        
+    $app = $this->getApp();
     $srv = $this->user_srv;
     $srv->mailResetRequest($app);
     $app->flash('info', 'An email has been sent if a valid email address was provided.');
     $app->redirectTo('main_page');
   }
-  
-  public function processToken($token) {    
+
+  public function processResetToken($token) {
     $srv = $this->user_srv;
     $user = $srv->verifyToken($token);
     $app = $this->getApp();
     if (isset($user)) {
-      $app->render('User\password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user->getId()));
+      $app->render('User\password_reset.html.twig', array('user_id' => $user->getId()));
     } else {
       $app->redirectTo('error_404');
     }
   }
-  
+
   public function processNewPassword() {
     $srv = $this->user_srv;
     $app = $this->getApp();
@@ -116,10 +122,10 @@ class UserController extends Controller {
     if (true === $processed) {
       $app->flash('info', 'Your password has been changed');
       $app->redirectTo('main_page');
-    } else {      
+    } else {
       $user_id = $app->request->post('user_id');
-      $app->render('User\password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user_id, 'errors' => $processed ));
+      $app->render('User\password_reset.html.twig', array('user_id' => $user_id, 'errors' => $processed));
     }
   }
-  
+
 }

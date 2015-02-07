@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block nav_menu %}
+  {{ parent() }}
+  {% include 'Admin/admin.menu.l2.html.twig' %}
+{% endblock nav_menu %}
+
+{% block extracss %}
+  <link href="/js/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+{% endblock extracss %}
+
+{% block content %}
+  <section id="btn_controls">
+    <h1 class="header">Jump to</h1>
+    <a class="btn btn-action" href="#bread-tbl">Bread images</a>
+    <a class="btn btn-action" href="#topping-tbl">Toppings images</a>
+  </section>
+  <section id="manage_img">        
+    <h1 class="header">Image management</h1>
+
+    {% include 'Admin/admin_img_breads.html.twig' %}
+    {% include 'Admin/admin_img_toppings.html.twig' %}
+
+  </section>
+{% endblock content %}
+
+{% block extrajs %}
+  <script type="text/javascript" src="/js/DataTables/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $('#bread-tbl').DataTable();
+      $('#topping-tbl').DataTable();
+    });
+  </script>
+{% endblock extrajs %}

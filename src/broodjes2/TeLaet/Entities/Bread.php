@@ -15,6 +15,7 @@ class Bread {
   private $id;
   private $name;
   private $price;
+  private $image;
   
   private $toppings;
   
@@ -48,6 +49,14 @@ class Bread {
   
   function addTopping(Topping $topping) {
     $this->toppings[] = $topping;
+  }
+  
+  function getImage() {
+    return $this->image;
+  }
+
+  function setImage($image) {
+    $this->image = $image;
   }
 
 }

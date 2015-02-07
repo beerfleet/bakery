@@ -83,8 +83,10 @@ class BreadService extends Service {
       $bread = $repo->find($app->request->post('id'));
       $name = $app->request->post('name');
       $price= $app->request->post('price');
+      $image = $app->request->post('image');
       $bread->setName( ucwords($name));
       $bread->setPrice($price * 100);
+      $bread->setImage($image);
       $em->merge($bread);
       $em->flush();
       return false;
@@ -166,8 +168,10 @@ class BreadService extends Service {
       $topping = $repo->find($app->request->post('id'));
       $name = $app->request->post('name');
       $price= $app->request->post('price');
+      $image = $app->request->post('image');
       $topping->setName( ucwords($name));
       $topping->setPrice($price * 100);
+      $topping->setImage($image);
       $em->merge($topping);
       $em->flush();
       return false;

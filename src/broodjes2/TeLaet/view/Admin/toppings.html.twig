@@ -2,12 +2,10 @@
 
 {% block nav_menu %}
   {{ parent() }}
-  {% set app = globals.app %}
   {% include 'Admin/admin.menu.l2.html.twig' %}
 {% endblock nav_menu %}
 
 {% block content %}
-  {% set app = globals.app %}
   <h1 class="header">Topping management</h1>
   <div id="topping-panel">
     <div id="toppings">
@@ -18,11 +16,19 @@
           <a class="floatright pad-right-6" href="{{ app.urlFor('admin_topping_remove', {'id': topping.id }) }}" title="Remove {{ topping.name }}"><span class="glyphicon glyphicon-remove" ></span></a>          
           <span class="floatright topping pad-right-6" data-toppingid="{{ topping.id }}"> &euro; {{ (topping.price / 100)|number_format(2) }}</span>
           <span>{{ topping.name }}</span>
+          {% if topping.image == '' %}
+            <span style="color:red">
+              -- no image assigned 
+            </span>
+          {% else %}
+            <span style="color:green">
+              -- {{ topping.image }}
+            </span>
+          {% endif %}
         </div>  
       {% endfor %}
     </div>
 
-    {% set app = globals.app %}
     <div class="controls">
       <form action="{{ app.urlFor('admin_topping_add') }}" method="post">
         <div class="form-group">

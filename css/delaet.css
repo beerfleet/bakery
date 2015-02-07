@@ -5,8 +5,8 @@
 
 /* MISC */
 .floatright {float: right}
-.even {background-color: #fffae3}
-.odd {background-color: #eadf9e;}
+.even, .table-striped > tbody > tr:nth-child(2n) {background-color: #fffae3}
+.odd, .table-striped > tbody > tr:nth-child(2n+1) {background-color: #eadf9e;}
 .btn-small {
   padding-top: 0;
   padding-bottom: 0;
@@ -14,7 +14,8 @@
 .btn-small a {
   color: blue;
 }
-.bodyBG {
+.bodyBG,
+#manage_img article {
   border-radius: 5px;
   background-color: beige;
   padding: 12px;
@@ -22,8 +23,17 @@
 
 /* buttons */
 .btn-action {
-  background-color: #F6FD99;
-  font-weight: bolder;
+  border: 1px solid #E7F20D;
+  background-image: linear-gradient(to bottom, #F6FD99 0%, #FAFEC2 100%);
+  /*background-color: #F6FD99;*/
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: blue;
+}
+
+.btn.btn-action:hover, 
+.btn.btn-action:active {
+  background-image: linear-gradient(to bottom, #E4EC53 0%, #F0F898 100%);
 }
 
 
@@ -59,20 +69,19 @@
 
 #header {
   /*background-color: #fff1cd;*/
-  background-color: #BEA884;
-  /*background-image: url('../img/header_bg.jpg');*/
-  height: 120px;
+  /*background-color: #BEA884;*/
+  background-image: url('../img/headbg.png');
+  background-repeat:  no-repeat;
+  background-position: center;
+  height: 160px;
 }
 
-#head {
-  height: 120px;  
-  
-}
 
 #header h1 {
+  text-align: center;
   color: #BEA884;
   font-family: HeaderFont;
-  font-size: 6em;
+  font-size: 8em;
   /*visibility: hidden;*/
 }
 
@@ -138,9 +147,15 @@ li.active2 {
   float: right;
 }
 
+/* images */
+#manage_img article {
+  border-bottom: 5px solid #D1D1D1;
+  margin-bottom: 24px;
+}
+
 /* CONTENT */
 .header {
-  border-radius: 10px;
+  border-radius: 6px;
   height: 60px;
   padding-top: 10px;    
   padding-left: 12px;
@@ -148,7 +163,13 @@ li.active2 {
   font-size: 1.9em;
 }
 .subtitle {
+  border: 3px #FFFFFF solid;
+  border-radius: 3px;
+  height: 45px;
   border-bottom: 1px solid #e3e3e3;
+  padding-left: 6px;
+  padding-top: 5px; 
+  background-color: #DCD1BE;
 }
 h2 {
   font-size: 1.75em;
@@ -173,13 +194,13 @@ html, body {
 .footer {
   margin-top: 40px;
   padding-top: 40px;
-  background-color: #bea884;
+  /*background-color: #bea884;*/  
   clear: both;
 }
 
 .footer p {
   text-align: center;
-  color: white;
+  color: #969696;
 }
 
 .footer, .push {

@@ -41,7 +41,7 @@ $app->post('/password/reset', function() use ($contr) {
 })->name('password_reset_process');
 
 $app->get('/reset/:token', function($token) use ($contr) {
- $contr->processToken($token);
+ $contr->processResetToken($token);
 })->name('reset_token_verify');
 
 $app->post('/password/store', function() use ($contr) {  

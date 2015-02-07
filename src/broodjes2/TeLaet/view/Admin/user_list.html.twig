@@ -1,10 +1,53 @@
 {% extends 'base.html.twig' %}
-{% set app = globals.app %}
 {% block nav_menu %}
   {{ parent() }}
   {% include 'Admin/admin.menu.l2.html.twig' %}
 {% endblock nav_menu %}
 
+{% block extracss %}
+  <link href="/js/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+{% endblock extracss %}
+
 {% block content %}
-  <h1>Here comes the user list</h1>
+  <div class="table-responsive">
+    <h1 class="header">Users</h1>
+    <table id="user-table" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Surname</th>
+          <th>Name</th>
+          <th>E-mail</th>
+          <th>Postcode</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>
+              <a title="Edit {{ user.username }}" href="{{ app.urlFor('admin_user_edit', {'id': user.id}) }}">
+                <span class="glyphicon glyphicon-edit"></span>
+              </a>
+              {{ user.username }}
+            </td>
+            <td>{{ user.surname }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.postcode.town }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock content %}
+
+{% block extrajs %}
+  <script type="text/javascript" src="/js/DataTables/js/jquery.dataTables.min.js">
+  </script>
+  <script type="text/javascript">
+    $(function () {
+      $('#user-table').DataTable();
+    });
+  </script>
+{% endblock extrajs %}

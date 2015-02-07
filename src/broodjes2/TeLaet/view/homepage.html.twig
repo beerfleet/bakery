@@ -4,9 +4,8 @@
 {% block content %}
 
   <div class="welcome">
-    {% if globals.user is defined and globals.user is not null %}
-      {% set user = globals.user %}
-      <h1 class="header">Hello, {{ globals.user.username }}</h1>
+    {% if user is defined and user is not null %}      
+      <h1 class="header">Hello, {{ user.username }}</h1>
       {% if user.isAdmin() %}
         <span class="status">Logged in as admin</span>
       {% else %}

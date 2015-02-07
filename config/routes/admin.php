@@ -59,3 +59,34 @@ $app->post('/admin/topping/edit/process', function() use ($contr) {
 $app->get('/admin/users', function() use ($contr){
   $contr->listAllUsers();
 })->name('admin_user_list');
+
+$app->get('/admin/user/edit/:id', function($id) use ($contr){
+  $contr->editUser($id);
+})->name('admin_user_edit');
+
+$app->post('/admin/user/edit', function() use ($contr){
+  $contr->editUserProcess();
+})->name('admin_user_edit_process');
+
+
+/* images */
+$app->get('/admin/images', function() use ($contr) {
+  $contr->manageImages();
+})->name('admin_images_manage');
+
+$app->post('/admin/images/bread/add', function() use ($contr) {
+  $contr->uploadBreadImg();
+})->name('admin_upload_bread_image');
+
+$app->post('/admin/images/toppings/add', function() use ($contr) {
+  $contr->uploadToppingsImg();
+})->name('admin_upload_toppings_image');
+
+$app->get('/admin/images/bread/:filename/delete', function($filename) use ($contr) {
+  $contr->deleteBreadImg($filename);
+})->name('admin_delete_bread_image');
+
+$app->get('/admin/images/topping/:filename/delete', function($filename) use ($contr) {
+  $contr->deleteToppingImg($filename);
+})->name('admin_delete_topping_image');
+
