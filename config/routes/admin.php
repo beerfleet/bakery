@@ -68,7 +68,13 @@ $app->post('/admin/user/edit', function() use ($contr){
   $contr->editUserProcess();
 })->name('admin_user_edit_process');
 
-/* files */
+
+/* images */
 $app->get('/admin/images', function() use ($contr) {
   $contr->manageImages();
 })->name('admin_images_manage');
+
+$app->post('/admin/images/bread/add', function() use ($contr) {
+  $contr->uploadBreadImg();
+})->name('admin_upload_bread_image');
+

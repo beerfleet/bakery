@@ -23,6 +23,9 @@
         {% endfor %}
       </tbody>
     </table>
+      <form action="{{ app.urlFor('admin_upload_bread_image') }}" method="post">
+        
+      </form>
   {% else %}
     No breads have been added yet
   {% endif %}

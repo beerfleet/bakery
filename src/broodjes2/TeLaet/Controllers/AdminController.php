@@ -6,6 +6,7 @@ use broodjes2\TeLaet\Controllers\Controller;
 use broodjes2\TeLaet\Service\Admin\AdminService;
 use broodjes2\TeLaet\Service\Bread\BreadService;
 use broodjes2\TeLaet\Service\User\UserService;
+use broodjes2\TeLaet\Exceptions\AccessDeniedException;
 use Slim\Slim;
 
 /**
@@ -216,7 +217,7 @@ class AdminController extends Controller {
     $srv = new UserService($this->getEntityManager());
     $errors = $srv->processEditUser($app);
     if (null === $errors) {
-      $app->flash('info', $app->request->post('username') .  ' is updated.');
+      $app->flash('info', $app->request->post('username') . ' is updated.');
       $app->redirectTo('admin_user_list');
     } else {
       $app->flash('errors', $errors);
@@ -225,16 +226,25 @@ class AdminController extends Controller {
   }
 
   //users
-  
-  
+
+
   /* images */
   public function manageImages() {
     $app = $this->getApp();
-    $srv  = new AdminService($this->getEntityManager());
-    $breads = $srv->getBreadImageFileInfos();
-    $toppings = $srv->getToppingImageFileInfos();
-    $app->render('Admin/images.html.twig', array('breads' => $breads, 'toppings' => $toppings));
-  }    
-  
+    try {      
+      $srv = new AdminService($this->getEntityManager());
+      $breads = $srv->getBreadImageFileInfos();
+      $toppings = $srv->getToppingImageFileInfos();
+      $app->render('Admin/images.html.twig', array('breads' => $breads, 'toppings' => $toppings));
+    } catch (AccessDeniedException $e) {
+      $app->flash('error', $e->getMessage());
+      $app->redirectTo('main_page');
+    }
+  }
+
+  public function uploadBreadImg() {
+    $app = $this->getApp();
+  }
+
   //images
 }
