@@ -3,10 +3,12 @@
 namespace broodjes2\TeLaet\Controllers;
 
 use broodjes2\TeLaet\Controllers\Controller;
+use broodjes2\TeLaet\Entities\Constants\Files;
 use broodjes2\TeLaet\Service\Admin\AdminService;
 use broodjes2\TeLaet\Service\Bread\BreadService;
 use broodjes2\TeLaet\Service\User\UserService;
 use broodjes2\TeLaet\Exceptions\AccessDeniedException;
+use broodjes2\TeLaet\Exceptions\ImageException;
 use Slim\Slim;
 
 /**
@@ -231,11 +233,11 @@ class AdminController extends Controller {
   /* images */
   public function manageImages() {
     $app = $this->getApp();
-    try {      
+    try {
       $srv = new AdminService($this->getEntityManager());
       $breads = $srv->getBreadImageFileInfos();
       $toppings = $srv->getToppingImageFileInfos();
-      $app->render('Admin/images.html.twig', array('breads' => $breads, 'toppings' => $toppings));
+      $app->render('Admin/images.html.twig', array('breads' => $breads, 'toppings' => $toppings, 'maxsize' => Files::MAX_SIZE));
     } catch (AccessDeniedException $e) {
       $app->flash('error', $e->getMessage());
       $app->redirectTo('main_page');
@@ -244,7 +246,31 @@ class AdminController extends Controller {
 
   public function uploadBreadImg() {
     $app = $this->getApp();
+    try {
+      $srv = new AdminService($this->getEntityManager());
+      $srv->uploadBreadImage('image');
+      $app->flash('info', 'Image succesfully uploaded');
+      $app->redirectTo('admin_images_manage');
+    } catch (ImageException $e) {
+      $app->flash('error', $e->getMessage());
+      $app->redirectTo('admin_images_manage');
+    }
   }
+
+  public function uploadToppingsImg() {
+    $app = $this->getApp();
+    try {
+      $srv = new AdminService($this->getEntityManager());
+      $srv->uploadToppingImage('image');
+      $app->flash('info', 'Image succesfully uploaded');
+      $app->redirectTo('admin_images_manage');
+    } catch (ImageException $e) {
+      $app->flash('error', $e->getMessage());
+      $app->redirectTo('admin_images_manage');
+    }
+  }
+  
+  
 
   //images
 }

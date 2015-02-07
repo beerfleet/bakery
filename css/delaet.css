@@ -14,7 +14,8 @@
 .btn-small a {
   color: blue;
 }
-.bodyBG {
+.bodyBG,
+#manage_img article {
   border-radius: 5px;
   background-color: beige;
   padding: 12px;
@@ -22,8 +23,17 @@
 
 /* buttons */
 .btn-action {
-  background-color: #F6FD99;
+  border: 1px solid #E7F20D;
+  background-image: linear-gradient(to bottom, #F6FD99 0%, #FAFEC2 100%);
+  /*background-color: #F6FD99;*/
   font-weight: bolder;
+  margin-bottom: 5px;
+  color: black;
+}
+
+.btn.btn-action:hover, 
+.btn.btn-action:active {
+  background-image: linear-gradient(to bottom, #E4EC53 0%, #F0F898 100%);
 }
 
 
@@ -136,6 +146,12 @@ li.active2 {
 .controls #tprice {
   width: 25%;
   float: right;
+}
+
+/* images */
+#manage_img article {
+  border-bottom: 5px solid #D1D1D1;
+  margin-bottom: 24px;
 }
 
 /* CONTENT */

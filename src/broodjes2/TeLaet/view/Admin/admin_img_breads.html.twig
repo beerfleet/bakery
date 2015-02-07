@@ -2,31 +2,39 @@
   <h2 class="subtitle">Breads</h2>
 
   {% if breads|length > 0 %}
-    <table id="bread-tbl" class="table table-striped" id="bread_img_tbl">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Extension</th>
-          <th>Size</th>
-          <th>Image</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {% for file in breads %}
+    <div class="table-responsive">
+      <table id="bread-tbl" class="table table-striped" id="bread_img_tbl">
+        <thead>
           <tr>
-            <td>{{ file.name }}</td>
-            <td>{{ file.extension }}</td>
-            <td>{{ file.size }}</td>
-            <td><img src="../img/Breads/{{ file.fullname }}" alt="{{ file.fullname }}" width="120"/></td>
+            <th>Name</th>
+            <th>Extension</th>
+            <th>Size</th>
+            <th>Image</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-      <form action="{{ app.urlFor('admin_upload_bread_image') }}" method="post">
-        
-      </form>
+        </thead>
+
+        <tbody>
+          {% for file in breads %}
+            <tr>
+              <td>{{ file.name }}</td>
+              <td>{{ file.extension }}</td>
+              <td>{{ file.size }}</td>
+              <td><img src="../img/Breads/{{ file.fullname }}" alt="{{ file.fullname }}" width="120"/></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% else %}
     No breads have been added yet
   {% endif %}
+
+  <form enctype="multipart/form-data" action="{{ app.urlFor('admin_upload_bread_image') }}" method="post">
+
+    <div class="form-group">
+
+      <input type="file" id="image" name="image" />
+    </div>
+    <input class="form-control btn btn-action" type="submit" id="upload" name="upload" value="Upload Image" />
+  </form>
 </article>

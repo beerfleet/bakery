@@ -78,3 +78,7 @@ $app->post('/admin/images/bread/add', function() use ($contr) {
   $contr->uploadBreadImg();
 })->name('admin_upload_bread_image');
 
+$app->post('/admin/images/toppings/add', function() use ($contr) {
+  $contr->uploadToppingsImg();
+})->name('admin_upload_toppings_image');
+
