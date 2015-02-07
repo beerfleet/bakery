@@ -26,9 +26,9 @@
   border: 1px solid #E7F20D;
   background-image: linear-gradient(to bottom, #F6FD99 0%, #FAFEC2 100%);
   /*background-color: #F6FD99;*/
-  font-weight: bolder;
+  font-weight: bold;
   margin-bottom: 5px;
-  color: black;
+  color: blue;
 }
 
 .btn.btn-action:hover, 
@@ -156,7 +156,7 @@ li.active2 {
 
 /* CONTENT */
 .header {
-  border-radius: 10px;
+  border-radius: 6px;
   height: 60px;
   padding-top: 10px;    
   padding-left: 12px;
@@ -164,7 +164,13 @@ li.active2 {
   font-size: 1.9em;
 }
 .subtitle {
+  border: 3px #FFFFFF solid;
+  border-radius: 3px;
+  height: 45px;
   border-bottom: 1px solid #e3e3e3;
+  padding-left: 6px;
+  padding-top: 5px; 
+  background-color: #DCD1BE;
 }
 h2 {
   font-size: 1.75em;
