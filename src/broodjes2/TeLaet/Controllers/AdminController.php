@@ -225,4 +225,16 @@ class AdminController extends Controller {
   }
 
   //users
+  
+  
+  /* images */
+  public function manageImages() {
+    $app = $this->getApp();
+    $srv  = new AdminService($this->getEntityManager());
+    $breads = $srv->getBreadImageFileInfos();
+    $toppings = $srv->getToppingImageFileInfos();
+    $app->render('Admin/images.html.twig', array('breads' => $breads, 'toppings' => $toppings));
+  }    
+  
+  //images
 }

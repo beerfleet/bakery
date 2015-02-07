@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block nav_menu %}
+  {{ parent() }}
+  {% include 'Admin/admin.menu.l2.html.twig' %}
+{% endblock nav_menu %}
+
+{% block content %}
+  <section id="manage_img">        
+    <h1 class="header">Image management</h1>
+        
+    {% include 'Admin/admin_img_breads.html.twig' %}
+    {% include 'Admin/admin_img_toppings.html.twig' %}
+
+  </section>
+{% endblock content %}

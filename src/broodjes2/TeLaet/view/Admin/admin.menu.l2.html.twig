@@ -11,6 +11,9 @@
       <li {% if app.urlFor('admin_user_list') == path %} class="active2" {% endif %}>
         <a href="{{ app.urlFor('admin_user_list') }}">Users</a>
       </li>
+      <li {% if app.urlFor('admin_images_manage') == path %} class="active2" {% endif %}>
+        <a href="{{ app.urlFor('admin_images_manage') }}">Images</a>
+      </li>
     </ul>
   </div>
 </nav>

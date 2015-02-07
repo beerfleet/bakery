@@ -1,0 +1,29 @@
+<article id="toppings">
+  <h2 class="subtitle">Toppings</h2>
+
+  {% if toppings|length > 0 %}
+    <table class="table table-striped" id="bread_img_tbl">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Extension</th>
+          <th>Size</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for file in toppings %}
+          <tr>
+            <td>{{ file.name }}</td>
+            <td>{{ file.extension }}</td>
+            <td>{{ file.size }}</td>
+            <td><img src="../img/Breads/{{ file.fullname }}" alt="{{ file.fullname }}" width="120"/></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    No toppings have been added yet
+  {% endif %}
+</article>  
