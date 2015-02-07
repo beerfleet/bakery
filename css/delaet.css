@@ -70,9 +70,10 @@
 #header {
   /*background-color: #fff1cd;*/
   /*background-color: #BEA884;*/
-  /*background-image: url('../img/header_bg.jpg');*/
-  
-  height: 120px;
+  background-image: url('../img/headbg.png');
+  background-repeat:  no-repeat;
+  background-position: center;
+  height: 160px;
 }
 
 
