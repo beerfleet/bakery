@@ -27,3 +27,6 @@ broodjes2\TeLaet\Entities\Bread:
       length: 45
     price:
       type: integer
+    image:
+      type: string
+      length: 64

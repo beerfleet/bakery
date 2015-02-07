@@ -16,6 +16,15 @@
           <a class="floatright pad-right-6" href="{{ app.urlFor('admin_topping_remove', {'id': topping.id }) }}" title="Remove {{ topping.name }}"><span class="glyphicon glyphicon-remove" ></span></a>          
           <span class="floatright topping pad-right-6" data-toppingid="{{ topping.id }}"> &euro; {{ (topping.price / 100)|number_format(2) }}</span>
           <span>{{ topping.name }}</span>
+          {% if topping.image == '' %}
+            <span style="color:red">
+              -- no image assigned 
+            </span>
+          {% else %}
+            <span style="color:green">
+              -- {{ topping.image }}
+            </span>
+          {% endif %}
         </div>  
       {% endfor %}
     </div>

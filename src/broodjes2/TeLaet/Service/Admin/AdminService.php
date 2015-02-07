@@ -117,6 +117,25 @@ class AdminService {
     }
     return($infos);
   }
+  
+  public function getFilesInDir($dir) {    
+    $infos = array();
+
+    if ($handle = opendir($dir)) {
+      while (false !== ($file = readdir($handle))) {
+        if ('.' === $file)
+          continue;
+        if ('..' === $file)
+          continue;
+
+        // do sum w file        
+        $fullPath = $dir . '/' . $file;        
+        $infos[] = $fullPath;
+      }
+      closedir($handle);
+    }
+    return($infos);
+  }
 
   
   public function check_image($file) {

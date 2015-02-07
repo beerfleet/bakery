@@ -12,6 +12,7 @@ class Topping {
   private $id;
   private $name;
   private $price;
+  private $image;
 
   function getId() {
     return $this->id;
@@ -35,6 +36,14 @@ class Topping {
 
   function setPrice($price) {
     $this->price = $price;
+  }
+
+  function getImage() {
+    return $this->image;
+  }
+
+  function setImage($image) {
+    $this->image = $image;
   }
 
 }

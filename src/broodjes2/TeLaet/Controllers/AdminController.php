@@ -85,8 +85,10 @@ class AdminController extends Controller {
     if ($this->isUserAdmin()) {
       $bread_srv = new BreadService($this->getEntityManager());
       $bread = $bread_srv->findBread($id);
+      $admin_srv = new AdminService($this->getEntityManager());
+      $files = $admin_srv->getFilesInDir(Files::BREAD_IMG_DIR);
       if (isset($bread)) {
-        $app->render('Admin/edit_bread.html.twig', array('bread' => $bread));
+        $app->render('Admin/edit_bread.html.twig', array('bread' => $bread, 'files' => $files));
       } else {
         $app->flash('error', 'Invalid operation.');
         $app->redirectTo('admin_manage_breads');
@@ -161,8 +163,10 @@ class AdminController extends Controller {
     if ($this->isUserAdmin()) {
       $bread_srv = new BreadService($this->getEntityManager());
       $topping = $bread_srv->findTopping($id);
+      $admin_srv = new AdminService($this->getEntityManager());
+      $files = $admin_srv->getFilesInDir(Files::TOPPING_IMG_DIR);
       if (isset($topping)) {
-        $app->render('Admin/edit_topping.html.twig', array('topping' => $topping));
+        $app->render('Admin/edit_topping.html.twig', array('topping' => $topping, 'files' => $files));
       } else {
         $app->flash('error', 'Invalid operation.');
         $app->redirectTo('admin_manage_toppings');

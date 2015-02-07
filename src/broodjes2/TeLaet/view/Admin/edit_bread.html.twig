@@ -8,27 +8,37 @@
 {% block content %}
   <h1 class="header">Edit bread</h1>
   <form class="bodyBG" action="{{ app.urlFor('admin_bread_edit_process') }}" method="post">
-    
+
     <input type="hidden" id="id" name="id" value="{{ bread.id }}" />
-    
+
     <div class="form-group">
       <label for="name">Bread</label>
       <input class="form-control" type="text" id="name" name="name" value="{{ bread.name }}" />
     </div>
-    
+
     <div class="form-group">
       <label for="price">Price</label>
       <input class="form-control" type="text" id="price" name="price" value="{{ (bread.price / 100)|number_format(2) }}" />
     </div>
-    
-    <input class="form-control btn btn-info btn-action" type="submit" id="submit" name="submit" value="Update" />
+
+    <div class="form-group">
+      <label for="image">Image</label>
+      <select class="form-control" id="image" name="image">
+        <option value=""></option>
+        {% for file in files %}
+          <option {% if file == bread.image %} selected {% endif %} value="{{ file }}">{{ file }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <input class="form-control btn btn-action" type="submit" id="submit" name="submit" value="Update" />
   </form>
 {% endblock content %}
 
 {% block extrajs %}
   <script type="text/javascript">
-    $(function() {
-      $('ul>li>a').each(function() {
+    $(function () {
+      $('ul>li>a').each(function () {
         if ($(this).text() == "Breads") {
           $(this).parent().addClass("active2");
         }

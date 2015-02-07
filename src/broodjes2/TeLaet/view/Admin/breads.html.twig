@@ -15,6 +15,15 @@
           <a class="floatright pad-right-6" href="{{ app.urlFor('admin_bread_remove', {'id': bread.id }) }}" title="Remove {{ bread.name }}"><span class="glyphicon glyphicon-remove" ></span></a>
           <span class="floatright bread pad-right-6" data-breadid="{{ bread.id }}"> &euro; {{ (bread.price / 100)|number_format(2) }}</span>
           <span>{{ bread.name }}</span>
+          {% if bread.image == '' %}
+            <span style="color:red">
+              -- no image assigned 
+            </span>
+          {% else %}
+            <span style="color:green">
+              -- {{ bread.image }}
+            </span>
+          {% endif %}
         </div>  
       {% endfor %}
     </div>
