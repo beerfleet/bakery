@@ -69,20 +69,18 @@
 
 #header {
   /*background-color: #fff1cd;*/
-  background-color: #BEA884;
+  /*background-color: #BEA884;*/
   /*background-image: url('../img/header_bg.jpg');*/
+  
   height: 120px;
 }
 
-#head {
-  height: 120px;  
-  
-}
 
 #header h1 {
+  text-align: center;
   color: #BEA884;
   font-family: HeaderFont;
-  font-size: 6em;
+  font-size: 8em;
   /*visibility: hidden;*/
 }
 
@@ -195,13 +193,13 @@ html, body {
 .footer {
   margin-top: 40px;
   padding-top: 40px;
-  background-color: #bea884;
+  /*background-color: #bea884;*/  
   clear: both;
 }
 
 .footer p {
   text-align: center;
-  color: white;
+  color: #969696;
 }
 
 .footer, .push {
