@@ -30,7 +30,7 @@
 /* MISC */
 .floatright {float: right}
 .even, .table-striped > tbody > tr:nth-child(2n) {background-color: #fffae3}
-.odd, .table-striped > tbody > tr:nth-child(2n+1) {background-color: #f9f9f9;}
+.odd, .table-striped > tbody > tr:nth-child(2n+1) {background-color: #fdfbc3;}
 .btn-small {
   padding-top: 0;
   padding-bottom: 0;
@@ -157,6 +157,14 @@ li:hover {
   padding-left: 5px;
   margin-bottom: 5px;
 }
+#breads form,
+#toppings form {
+  background-color: white;
+  padding-bottom: 5px;
+  margin-bottom: 12px;
+  padding: 5px;
+}
+
 .pad-right-6 {
   padding-right: 6px;
 }
@@ -206,6 +214,7 @@ li:hover {
   color: red;
   font-family: monospace;  
   font-weight: bold;  
+  margin-left: 20px;
 }
 
 /* CONTENT */

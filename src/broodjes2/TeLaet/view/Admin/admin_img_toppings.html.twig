@@ -1,5 +1,14 @@
 <article id="toppings">
-  <h2 class="subtitle">Toppings</h2>
+  <h2 id="topping-form" class="subtitle">Toppings</h2>
+
+  <form enctype="multipart/form-data" action="{{ app.urlFor('admin_upload_toppings_image') }}" method="post">
+    <div class="form-group">
+      <span class="btn btn-action btn-file">
+        Browse <input type="file" id="image" name="image" />
+      </span>
+    </div>
+    <input class="form-control btn btn-action" type="submit" id="upload" name="upload" value="Upload Image" />
+  </form>
 
   {% if toppings|length > 0 %}
     <div class="table-responsive">
@@ -31,14 +40,5 @@
   {% else %}
     No toppings have been added yet
   {% endif %}
-  <form enctype="multipart/form-data" action="{{ app.urlFor('admin_upload_toppings_image') }}" method="post">
 
-    <div class="form-group">
-
-      <span class="btn btn-action btn-file">
-        Browse <input type="file" id="image" name="image" />
-      </span>
-    </div>
-    <input class="form-control btn btn-action" type="submit" id="upload" name="upload" value="Upload Image" />
-  </form>
 </article>  

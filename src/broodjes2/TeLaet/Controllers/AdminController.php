@@ -253,7 +253,7 @@ class AdminController extends Controller {
     try {
       $srv = new AdminService($this->getEntityManager());
       $srv->uploadBreadImage('image');
-      $app->flash('info', 'Image succesfully uploaded');
+      $app->flash('info',  $_FILES['image']['name'] . ' succesfully uploaded');
       $app->redirectTo('admin_images_manage');
     } catch (ImageException $e) {
       $app->flash('error', $e->getMessage());
@@ -266,7 +266,7 @@ class AdminController extends Controller {
     try {
       $srv = new AdminService($this->getEntityManager());
       $srv->uploadToppingImage('image');
-      $app->flash('info', 'Image succesfully uploaded');
+      $app->flash('info', $_FILES['image']['name'] . ' succesfully uploaded');
       $app->redirectTo('admin_images_manage');
     } catch (ImageException $e) {
       $app->flash('error', $e->getMessage());
