@@ -19,14 +19,16 @@
   {% set logged_in = user %}
   <nav id="reg-menu">
     <div class="container">
-      <ul class="nav nav-pills">        
-        <li {% if app.urlFor('user_logoff') == path %} class="active2" {% endif %}>
+      <ul class="nav nav-pills floatright">
+        <li>
           <a href="{{ app.urlFor('user_logoff') }}">Logoff</a>
         </li>
+      </ul>
+      <ul class="nav nav-tabs">
         {% if logged_in.isAdmin %}
-        <li {% if app.urlFor('admin_main_page') == path %} class="active2" {% endif %}>
-          <a href="{{ app.urlFor('admin_main_page') }}">Admin</a>
-        </li>
+          <li {% if app.urlFor('admin_main_page') == path %} class="active2" {% endif %}>
+            <a href="{{ app.urlFor('admin_main_page') }}">Admin</a>
+          </li>
         {% endif %}
       </ul>
     </div>

@@ -140,7 +140,7 @@ class UserService {
 
   public function mailResetToken(User $user) {
     $subject = 'Reset Token Requested';
-    $message = "Dear Mr " . $user->getSurname() . ".\n" .
+    $message = "Dear Mr / Mrs " . $user->getSurname() . ".\n" .
         "Click http://" . $_SERVER['HTTP_HOST'] . "/reset/" . $user->getResetToken();
     $header = "From: noreply@janvanbiervliet.com";
     $this->mailUser($user, $subject, $message, $header);

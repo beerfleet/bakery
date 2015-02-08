@@ -1,17 +1,26 @@
 @font-face {
+  font-family: 'GeneralFont';
+  src: url('../fonts/Cabin-Regular.otf') format('truetype');
+}
+@font-face {
   font-family: 'HeaderFont';
   src: url('../fonts/SHANLN__.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'SubheaderFont';
+  src: url('../fonts/DejaVuSansMono.ttf') format('truetype');
 }
 
 /* FX */
 #body {
+  font-family: GeneralFont;
   background-color: #fbfaf8;
   opacity: 0;
-    -webkit-transition: opacity .25s ease-in;
-       -moz-transition: opacity .25s ease-in;
-        -ms-transition: opacity .25s ease-in;
-         -o-transition: opacity .25s ease-in;
-            transition: opacity .25s ease-in;
+  -webkit-transition: opacity .25s ease-in;
+  -moz-transition: opacity .25s ease-in;
+  -ms-transition: opacity .25s ease-in;
+  -o-transition: opacity .25s ease-in;
+  transition: opacity .25s ease-in;
 }
 #body.load {
   opacity: 1;
@@ -21,7 +30,7 @@
 /* MISC */
 .floatright {float: right}
 .even, .table-striped > tbody > tr:nth-child(2n) {background-color: #fffae3}
-.odd, .table-striped > tbody > tr:nth-child(2n+1) {background-color: #eadf9e;}
+.odd, .table-striped > tbody > tr:nth-child(2n+1) {background-color: #f9f9f9;}
 .btn-small {
   padding-top: 0;
   padding-bottom: 0;
@@ -34,6 +43,7 @@
   border-radius: 5px;
   background-color: beige;
   padding: 12px;
+  padding-top: 1px;
 }
 
 /* buttons */
@@ -58,7 +68,7 @@
   background-color: #ffd9bb;
   margin-top: 24px;
   margin-bottom: 6px;
-  
+
   padding-top: 6px;
   padding-bottom: 6px;
   line-height: 2em;
@@ -68,7 +78,7 @@
   background-color: #c2fac9;
   border-radius: 6px;
   margin-top: 24px;
-  
+
   margin-bottom: 6px;
   padding-top: 6px;
   padding-left: 12px;
@@ -94,13 +104,13 @@
   background-position: center;
   height: 160px;
 }
-  #header h1 {
-    text-align: center;
-    color: #BEA884;
-    font-family: HeaderFont;
-    font-size: 8em;
-    /*visibility: hidden;*/
-  }
+#header h1 {
+  text-align: center;
+  color: #BEA884;
+  font-family: HeaderFont;
+  font-size: 8em;
+  /*visibility: hidden;*/
+}
 
 /*MENU*/
 #reg-menu {
@@ -112,7 +122,7 @@
   border-bottom: 1px solid #23527C;  
 }
 .menutitle {  
-  
+
   padding-left: 20px;
   padding-top: 3px;  
   border-bottom:  solid 1px #D5DEE7;
@@ -125,7 +135,7 @@ li.active2 {
   background-color: #D3E1FA;    
 }
 li:hover {  
-  
+
 }
 
 
@@ -138,7 +148,7 @@ li:hover {
   background-color: #D3E1FA;
 
   padding: 6px;  
-  
+
 }
 #breads .bread,
 #toppings .topping {
@@ -173,13 +183,40 @@ li:hover {
   margin-bottom: 24px;
 }
 
+.btn-file {
+  position: relative;
+  overflow: hidden;  
+  background-color: blue;
+}
+.btn-file input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;  
+  cursor: inherit;
+  display: block;  
+}
+.file-label {
+  color: red;
+  font-family: monospace;  
+  font-weight: bold;  
+}
+
 /* CONTENT */
 .header {
-  border-radius: 6px;
+  border-bottom : 1px solid #e3e3e3;
+  margin-bottom: 24px;  
   height: 60px;
   padding-top: 10px;    
   padding-left: 12px;
-  background-color: #BEA884;
+  /*background-color: #BEA884;*/
+  font-family: SubheaderFont;
   font-size: 1.9em;
 }
 .subtitle {
