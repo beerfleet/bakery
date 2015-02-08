@@ -3,6 +3,21 @@
   src: url('../fonts/SHANLN__.ttf') format('truetype');
 }
 
+/* FX */
+#body {
+  background-color: #fbfaf8;
+  opacity: 0;
+    -webkit-transition: opacity .25s ease-in;
+       -moz-transition: opacity .25s ease-in;
+        -ms-transition: opacity .25s ease-in;
+         -o-transition: opacity .25s ease-in;
+            transition: opacity .25s ease-in;
+}
+#body.load {
+  opacity: 1;
+}
+
+
 /* MISC */
 .floatright {float: right}
 .even, .table-striped > tbody > tr:nth-child(2n) {background-color: #fffae3}
@@ -67,6 +82,10 @@
 }
 
 
+/* main */
+
+
+/* header */
 #header {
   /*background-color: #fff1cd;*/
   /*background-color: #BEA884;*/
@@ -75,15 +94,13 @@
   background-position: center;
   height: 160px;
 }
-
-
-#header h1 {
-  text-align: center;
-  color: #BEA884;
-  font-family: HeaderFont;
-  font-size: 8em;
-  /*visibility: hidden;*/
-}
+  #header h1 {
+    text-align: center;
+    color: #BEA884;
+    font-family: HeaderFont;
+    font-size: 8em;
+    /*visibility: hidden;*/
+  }
 
 /*MENU*/
 #reg-menu {
@@ -105,7 +122,10 @@ li.active {
   background-color: #F2F2F2;
 }
 li.active2 {
-  background-color: #D3E1FA;
+  background-color: #D3E1FA;    
+}
+li:hover {  
+  
 }
 
 
