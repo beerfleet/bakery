@@ -30,6 +30,9 @@
             <a href="{{ app.urlFor('admin_main_page') }}">Admin</a>
           </li>
         {% endif %}
+        <li {% if app.urlFor('order_start') == path %} class="active2" {% endif %}>
+          <a href="{{ app.urlFor('order_start') }}">Order</a>
+        </li>
       </ul>
     </div>
   </nav>

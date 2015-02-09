@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+  <article id="order">
+
+    <section>
+      <h1 class="header">Order bread(s)</h1>
+      <div>
+        {% for bread in breads %}
+          <div class="bread floatleft bodyBG">
+            <div class="bread-name">{{ bread.name }}</div>
+            <img src="../{{ bread.getImage }}" alt="{{ bread.name }} image"/>
+            <span class="bread-price" >{{ (bread.price/100)|number_format(2) }} &euro;</span>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+      
+  </article>
+{% endblock content %}

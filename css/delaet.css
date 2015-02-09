@@ -29,6 +29,8 @@
 
 /* MISC */
 .floatright {float: right}
+.floatleft {float: left}
+
 .even, .table-striped > tbody > tr:nth-child(2n) {background-color: #fffae3}
 .odd, .table-striped > tbody > tr:nth-child(2n+1) {background-color: #fdfbc3;}
 .btn-small {
@@ -240,6 +242,34 @@ li:hover {
 h2 {
   font-size: 1.75em;
 }
+
+/* order */
+.bread-name {
+  margin-bottom: 6px;
+}
+.bread-price {
+  padding-left: 6px;  
+}
+#order {
+
+}
+  #order .bread {
+    height: 150px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+  }
+    #order .bread img {
+      width: 110px;      
+      border-radius: 3px;
+      border: 1px solid #e3e3e3;
+    }
+  #order .bodyBG {
+    padding-top: 12px;
+  }
+
+
+
+/* FOOTER */
 
 /* fixed footer */
 * {

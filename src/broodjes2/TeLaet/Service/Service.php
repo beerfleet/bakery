@@ -9,8 +9,7 @@ namespace broodjes2\TeLaet\Service;
  */
 abstract class Service {
 
-  private $em;
-  private $app;
+  private $em;  
 
   function __construct($em) {
     $this->em = $em;
@@ -23,6 +22,11 @@ abstract class Service {
   public function store($object) {
     $this->em->persist($object);
     $this->em->flush();
+  }
+  
+  public function getRepo($entity) {
+    $em = $this->getEntityManager();
+    return $em->getRepository($entity);
   }
 
 }

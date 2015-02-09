@@ -12,6 +12,7 @@ try {
   include 'config/routes/user.php';
   include 'config/routes/main.php';
   include 'config/routes/admin.php';
+  include 'config/routes/order.php';
   
   $app->run();
     
