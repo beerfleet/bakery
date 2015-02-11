@@ -2,10 +2,11 @@
 
 namespace broodjes2\TeLaet\Service\Order;
 
+use broodjes2\TeLaet\Exceptions\ElementNotFoundException;
+use broodjes2\TeLaet\Exceptions\AlreadyAddedException;
 use broodjes2\TeLaet\Service\Service;
 use broodjes2\TeLaet\Service\Bread\BreadService;
 use broodjes2\TeLaet\Entities\Constants\Entities;
-use broodjes2\TeLaet\Exceptions\ElementNotFoundException;
 use broodjes2\TeLaet\Entities\OrderLine;
 use broodjes2\TeLaet\Entities\Bread;
 
@@ -89,6 +90,38 @@ class OrderService extends Service {
       throw new ElementNotFoundException($key);
     }
     unset($_SESSION['basket'][$key]);
+  }
+  
+  public function addToppingToBread($line_key, $id) {
+    /* @var $line OrderLine */
+    if (!isset($_SESSION['basket'][$line_key])) {
+      throw new ElementNotFoundException("order line $line_key");
+    }
+    $br_srv = new BreadService($this->getEntityManager());
+    $topping = $br_srv->findTopping($id);
+    if (!isset($topping)) {
+      throw new ElementNotFoundException("Topping with $id");
+    }
+    $line = $_SESSION['basket'][$line_key];
+    if (in_array($topping, $line->getToppings()->toArray())) {
+      throw new AlreadyAddedException($topping->getName() . " already added.");
+    }
+    $line->addTopping($topping);
+    return $topping;
+  }
+  
+  public function removeToppingFromBread($ol_key, $t_key) {
+    if (!isset($_SESSION['basket'][$ol_key])) {
+      throw new ElementNotFoundException("order line $ol_key");
+    }
+    $line = $_SESSION['basket'][$ol_key];
+    $toppings = $line->getToppings();
+    if (!isset($toppings[$t_key])) {
+      throw new ElementNotFoundException("topping index $t_key");
+    }
+    
+    /* @var $line OrderLine */
+    unset($toppings[$t_key]);
   }
 
 }

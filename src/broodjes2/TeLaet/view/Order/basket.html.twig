@@ -1,18 +1,37 @@
 <section id="basket" class="clearboth">
 
   <h2><span class="glyphicon glyphicon-shopping-cart"></span>Bread basket</h2>
-  {% for key, line in basket %}
 
-    <div class="btn btn-action form-control" >
-      <a href="{{ app.urlFor('order_add_topping_page', {'key': key}) }}">{{ line.bread.name }}</a> 
-      <span> ( &euro; {{ (line.bread.price / 100)|number_format(2) }} ) </span>
-      <a href="{{ app.urlFor('order_remove_bread', {'key': key}) }}">
-        <span class="glyphicon glyphicon-remove">
-        </span>
-      </a>
-    </div>
+  {% set total = 0 %}
+  {% for key, line in basket %}
+    {% set total = total + line.bread.price %}
+    <div class="order-line">
+      <div class="btn btn-action form-control" >
+        <a href="{{ app.urlFor('order_add_topping_page', {'key': key}) }}">{{ line.bread.name }}</a> 
+        <span> ( &euro; {{ (line.bread.price / 100)|number_format(2) }} ) </span>
+        <a href="{{ app.urlFor('order_remove_bread', {'key': key}) }}"><span class="glyphicon glyphicon-remove"></span></a>
+      </div>
+
+      {% if line.toppings|length > 0 %}
+        <div id="paper" >
+          {% for t_key, topping in line.toppings %}
+            {% set total = total + topping.price %}
+            <div class="topping">
+              <span>{{ topping.name }}</span>
+              <span> ( &euro; {{ (topping.price/100)|number_format(2) }} )</span>
+              <a href="{{ app.urlFor('order_remove_topping', {'ol_key': key, 't_key': t_key}) }}"><span class="remove glyphicon glyphicon-remove floatright"></span></a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div><!-- order-line -->
+    
   {% endfor %}
 
+  <div class="total">
+    Total: &euro; {{ (total / 100)|number_format(2) }}
+  </div>
+  
   <div class="empty_basket" >
     <a href="{{ app.urlFor('order_empty_basket') }}">Empty basket</a>
   </div>

@@ -2,14 +2,14 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-8 clearfix">
       <article id="order">
         <section>
           <h1 class="header">2) Add toppings</h1>
           <p class="subtitle">What would you like with your <u><b>{{ order_line.bread.name }}</b></u> ?</p>
           <div>
             {% for topping in toppings %}
-              <a href="#">
+              <a href="{{ app.urlFor('order_add_topping', { 'order_line_key': order_line_key, 'id': topping.id }) }}">
                 <div class="bread floatleft bodyBG">
                   <div class="bread-name">{{ topping.name }}</div>
                   <img src="../../../{{ topping.getImage }}" alt="{{ topping.name }} image"/>

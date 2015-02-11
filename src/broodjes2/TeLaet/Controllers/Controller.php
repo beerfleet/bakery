@@ -92,6 +92,9 @@ abstract class Controller {
   }
 
   public function logoff() {
+    if (isset($_SESSION['basket'])) {
+      unset($_SESSION['basket']);
+    }
     unset($_SESSION['user']);
   }
 
