@@ -5,16 +5,22 @@
 
     <section>
       <h1 class="header">Order bread(s)</h1>
+      <p class="subtitle">Select your bread(s)</p>
       <div>
         {% for bread in breads %}
-          <div class="bread floatleft bodyBG">
-            <div class="bread-name">{{ bread.name }}</div>
-            <img src="../{{ bread.getImage }}" alt="{{ bread.name }} image"/>
-            <span class="bread-price" >{{ (bread.price/100)|number_format(2) }} &euro;</span>
-          </div>
+          <a href="{{ app.urlFor('order_add_bread', { 'id': bread.id }) }}">
+            <div class="bread floatleft bodyBG">
+              <div class="bread-name">{{ bread.name }}</div>
+              <img src="../{{ bread.getImage }}" alt="{{ bread.name }} image"/>
+              <span class="bread-price" >{{ (bread.price/100)|number_format(2) }} &euro;</span>
+            </div>
+          </a>
         {% endfor %}
       </div>
     </section>
-      
+
   </article>
+
+  {% include 'Order/basket.html.twig' %}
+
 {% endblock content %}

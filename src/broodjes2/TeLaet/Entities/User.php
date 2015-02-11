@@ -26,6 +26,7 @@ class User {
   private $is_admin;
   private $password_token;
   private $reset_token;
+  private $orders;
 
   function __construct() {
     $this->user_likes = new ArrayCollection();
@@ -34,6 +35,7 @@ class User {
     $this->whisky_likes = new ArrayCollection();
     $this->whiskys_created = new ArrayCollection();
     $this->events_created = new ArrayCollection();
+    $this->orders = new ArrayCollection();
   }
 
   function getId() {
@@ -146,6 +148,14 @@ class User {
 
   function setResetToken() {
     $this->reset_token = bin2hex(mcrypt_create_iv(128, MCRYPT_DEV_RANDOM));
+  }
+  
+  function getOrders() {
+    return $this->orders;
+  }
+
+  function setOrders($orders) {
+    $this->orders = $orders;
   }
 
 }

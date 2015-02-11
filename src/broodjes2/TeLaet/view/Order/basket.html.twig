@@ -1,0 +1,8 @@
+<section id="basket" class="clearboth">
+  <h2>Bread basket</h2>
+  {% for key, line in basket %}
+    <a href="{{ app.urlFor('order_add_topping_page', {'key': key}) }}">{{ line.bread.name }}</a> 
+  {% endfor %}
+  
+  <a class="bordertop" href="{{ app.urlFor('order_empty_basket') }}">Empty basket</a>
+</section>

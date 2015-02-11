@@ -15,6 +15,11 @@ broodjes2\TeLaet\Entities\User:
       joinColumn:
         name: postcode_id
         referencedColumnName: id
+        
+  oneToMany:
+    orders:
+      targetEntity: broodjes2\TeLaet\Entities\Order
+      mappedBy: user
 
   fields:
     username:

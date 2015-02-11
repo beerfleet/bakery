@@ -1,0 +1,39 @@
+broodjes2\TeLaet\Entities\OrderLine:
+  type: entity
+  #repositoryClass: broodjes2\TeLaet\Repository\OrderRepository
+  table: order_line
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  oneToMany:
+    toppings:
+      targetEntity: broodjes2\TeLaet\Entities\Topping
+      joinTable:
+        name: order_line_topping
+        joinColumns:
+          orderline_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          topping_id:
+            referencedColumnName: id
+ 
+  manyToOne:
+    order:
+      targetEntity: broodjes2\TeLaet\Entities\Order
+      inversedBy: order_lines
+      joinColumn:
+        name: order_id
+        referencedColumnId: id
+        
+  oneToOne:
+    bread:
+      targetEntity: broodjes2\TeLaet\Entities\Bread
+      joinColumn:
+        name: bread_id
+        referencedColumnName: id
+        
+      
+    

@@ -95,4 +95,17 @@ abstract class Controller {
     unset($_SESSION['user']);
   }
   
+  public function render($template, $args = array()) {
+    $app = $this->getApp();
+    $app->render($template, $args);
+  }
+  
+  public function redirectTo($route, $flashKey = null, $flashMsg = null) {
+    $app = $this->getApp();    
+    if (isset($flashKey) && isset($flashMsg)) {
+      $app->flash($flashKey, $flashMsg);
+    }
+    $app->redirectTo($route);    
+  }
+  
 }

@@ -1,0 +1,29 @@
+broodjes2\TeLaet\Entities\Order:
+  type: entity
+  #repositoryClass: broodjes2\TeLaet\Repository\OrderRepository
+  table: order
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  manyToOne:
+    user:
+      targetEntity: User
+      inversedBy: orders
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+        
+  oneToMany:
+    order_lines:
+      targetEntity: broodjes2\TeLaet\Entities\OrderLine
+      mappedBy: order
+
+  fields:
+    order_date:
+      type: datetime
+    
+    picked_up:
+      type: integer
