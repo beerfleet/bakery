@@ -26,7 +26,9 @@ class OrderController extends Controller {
     $data = $srv->fetchOrderStartData();
     $breads = $data['breads'];
     $basket = $data['basket'];
-    var_dump($basket);
+
+    var_dump($data['basket']);
+
     $this->getApp()->render('Order/order_page.html.twig', array('breads' => $breads, 'basket' => $basket));
   }
 
@@ -38,26 +40,38 @@ class OrderController extends Controller {
     try {
       /* @var $srv OrderService */
       $srv = $this->ord_srv;
-      $basket = $srv->addBreadToBasket($id);
-      
-      var_dump($basket);     
-      $this->redirectTo('order_start', 'info', 'Bread added.');
+      $bread = $srv->addBreadToBasket($id);
+      $this->redirectTo('order_start', 'info', $bread->getName() . " added.");
     } catch (ElementNotFoundException $e) {
-      $this->redirectTo('order_start', null, 'error', $e->getMessage());
+      $app = $this->getApp();
+      $app->flash('error', $e->getMessage());
+      $app->redirectTo('order_start');
     }
   }
-  
+
   public function emptyBasket() {
     $srv = $this->ord_srv;
     $srv->destroyBasket();
-    $this->redirectTo('order_start', 'info', 'Basket wxas emptied.');
+    $this->redirectTo('order_start', 'info', 'Basket was emptied.');
   }
-  
+
   public function addToppingPage($key) {
     $srv = $this->ord_srv;
     $data = $srv->getAddToppingsData($key);
     var_dump($data['order_line']);
     $this->render('Order/toppings.html.twig', array('order_line' => $data['order_line'], 'toppings' => $data['toppings'], 'basket' => $data['basket']));
+  }
+
+  public function removeBread($key) {
+    $app = $this->getApp();
+    try {
+      $srv = $this->ord_srv;
+      $srv->removeOrderlineWithKey($key);
+      $app->redirectTo('order_start');
+    } catch (ElementNotFoundException $e) {
+      $app->flash('error', $e->getMessage());
+      $app->redirectTo('order_start');
+    }
   }
 
 }

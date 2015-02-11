@@ -1,25 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-  <article id="order">
-
-    <section>
-      <h1 class="header">Add toppings</h1>
-      <p class="subtitle">What would you like with your <u><b>{{ order_line.bread.name }}</b></u> ?</p>
-      <div>
-        {% for topping in toppings %}
-          <a href="#">
-            <div class="bread floatleft bodyBG">
-              <div class="bread-name">{{ topping.name }}</div>
-              <img src="../../../{{ topping.getImage }}" alt="{{ topping.name }} image"/>
-              <span class="bread-price" >{{ (topping.price/100)|number_format(2) }} &euro;</span>
-            </div>
-          </a>
-        {% endfor %}
-      </div>
-    </section>
-
-  </article>
-
-  {% include 'Order/basket.html.twig' %}
+  <div class="row">
+    <div class="col-sm-8">
+      <article id="order">
+        <section>
+          <h1 class="header">2) Add toppings</h1>
+          <p class="subtitle">What would you like with your <u><b>{{ order_line.bread.name }}</b></u> ?</p>
+          <div>
+            {% for topping in toppings %}
+              <a href="#">
+                <div class="bread floatleft bodyBG">
+                  <div class="bread-name">{{ topping.name }}</div>
+                  <img src="../../../{{ topping.getImage }}" alt="{{ topping.name }} image"/>
+                  <span class="bread-price" >{{ (topping.price/100)|number_format(2) }} &euro;</span>
+                </div>
+              </a>
+            {% endfor %}
+          </div>
+        </section>
+      </article>
+    </div>
+    <div class="col-sm-4">
+      {% include 'Order/basket.html.twig' %}
+    </div>
+  </div>
 {% endblock content %}

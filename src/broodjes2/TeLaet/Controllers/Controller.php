@@ -12,8 +12,8 @@ use broodjes2\TeLaet\Entities\Constants\Entities;
  * @author jan van biervliet
  */
 abstract class Controller {
-  
   /* @var $em EntityManager() */
+
   private $em;
 
   /* @var $app  Slim */
@@ -26,9 +26,9 @@ abstract class Controller {
    */
   function __construct($em, $app) {
     $this->em = $em;
-    $this->app = $app;    
+    $this->app = $app;
   }
-  
+
   public function getEntityManager() {
     return $this->em;
   }
@@ -36,14 +36,14 @@ abstract class Controller {
   public function getApp() {
     return $this->app;
   }
-  
+
   /**
    * Gets Slim $app, current user and session vars for use in Twig 
    * @return 1 dimensional array of global vars
    */
   public function getGlobals() {
     $globals = array(
-      'app' => $this->app,  // http://docs.slimframework.com/
+      'app' => $this->app, // http://docs.slimframework.com/
       'user' => $this->getActiveUser(), // User
       'session' => $this->getSession(), // session var array
       'path' => $_SERVER['REQUEST_URI'], // current path,      
@@ -51,12 +51,12 @@ abstract class Controller {
     );
     return $globals;
   }
+
   public function getSession() {
     return $_SESSION;
-  
   }
-  
-  private function queryUserByUserName($username) {    
+
+  private function queryUserByUserName($username) {
     $em = $this->getEntityManager();
     $repo = $em->getRepository(Entities::USER);
     $user = $repo->findBy(array('username' => $username));
@@ -64,17 +64,17 @@ abstract class Controller {
   }
 
   public function getActiveUser() {
-    if (isset($_SESSION['user']) && $_SESSION['user'] != null ) {
+    if (isset($_SESSION['user']) && $_SESSION['user'] != null) {
       $user = $this->queryUserByUserName($_SESSION['user']);
       return isset($user[0]) ? $user[0] : null;
     }
     return null;
   }
-  
+
   public function isUserAnonymous() {
     return !$this->isLoggedIn();
   }
-  
+
   public function isUserLoggedIn() {
     return $this->getUser() != null;
   }
@@ -86,26 +86,26 @@ abstract class Controller {
     }
     return false;
   }
-  
+
   public function setUserLoggedOn($username) {
     $_SESSION['user'] = $username;
   }
-  
+
   public function logoff() {
     unset($_SESSION['user']);
   }
-  
+
   public function render($template, $args = array()) {
     $app = $this->getApp();
     $app->render($template, $args);
   }
-  
+
   public function redirectTo($route, $flashKey = null, $flashMsg = null) {
-    $app = $this->getApp();    
+    $app = $this->getApp();
     if (isset($flashKey) && isset($flashMsg)) {
       $app->flash($flashKey, $flashMsg);
     }
-    $app->redirectTo($route);    
+    $app->redirectTo($route);
   }
-  
+
 }

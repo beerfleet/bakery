@@ -277,9 +277,19 @@ h2 {
 
 /* basket */
 #basket {  
-  border-top: 1px solid #e3e3e3;  
+  margin-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e3e3e3;  
+  background-color: #F0F0F0;
+  border-radius: 6px;
+  border: white solid 1px;
+  padding: 6px;
 }
-
+.empty_basket {
+  padding-top: 12px;
+  border-top: 1px solid white;
+  text-align: center;
+}
 
 /* FOOTER */
 

@@ -1,8 +1,19 @@
 <section id="basket" class="clearboth">
-  <h2>Bread basket</h2>
+
+  <h2><span class="glyphicon glyphicon-shopping-cart"></span>Bread basket</h2>
   {% for key, line in basket %}
-    <a href="{{ app.urlFor('order_add_topping_page', {'key': key}) }}">{{ line.bread.name }}</a> 
+
+    <div class="btn btn-action form-control" >
+      <a href="{{ app.urlFor('order_add_topping_page', {'key': key}) }}">{{ line.bread.name }}</a> 
+      <span> ( &euro; {{ (line.bread.price / 100)|number_format(2) }} ) </span>
+      <a href="{{ app.urlFor('order_remove_bread', {'key': key}) }}">
+        <span class="glyphicon glyphicon-remove">
+        </span>
+      </a>
+    </div>
   {% endfor %}
-  
-  <a class="bordertop" href="{{ app.urlFor('order_empty_basket') }}">Empty basket</a>
+
+  <div class="empty_basket" >
+    <a href="{{ app.urlFor('order_empty_basket') }}">Empty basket</a>
+  </div>
 </section>

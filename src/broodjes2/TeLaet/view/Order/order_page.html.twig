@@ -1,26 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-  <article id="order">
-
-    <section>
-      <h1 class="header">Order bread(s)</h1>
-      <p class="subtitle">Select your bread(s)</p>
-      <div>
-        {% for bread in breads %}
-          <a href="{{ app.urlFor('order_add_bread', { 'id': bread.id }) }}">
-            <div class="bread floatleft bodyBG">
-              <div class="bread-name">{{ bread.name }}</div>
-              <img src="../{{ bread.getImage }}" alt="{{ bread.name }} image"/>
-              <span class="bread-price" >{{ (bread.price/100)|number_format(2) }} &euro;</span>
-            </div>
-          </a>
-        {% endfor %}
-      </div>
-    </section>
-
-  </article>
-
-  {% include 'Order/basket.html.twig' %}
+  <div class="row">
+    <div class="col-sm-8">
+      <article id="order">
+        <section>
+          <h1 class="header">1) Order bread(s)</h1>
+          <p class="subtitle">Select your bread(s)</p>
+          <div>
+            {% for bread in breads %}
+              <a href="{{ app.urlFor('order_add_bread', { 'id': bread.id }) }}">
+                <div class="bread floatleft bodyBG">
+                  <div class="bread-name">{{ bread.name }}</div>
+                  <img src="../{{ bread.getImage }}" alt="{{ bread.name }} image"/>
+                  <span class="bread-price" >{{ (bread.price/100)|number_format(2) }} &euro;</span>
+                </div>
+              </a>
+            {% endfor %}
+          </div>
+        </section>
+      </article>
+    </div> <!-- col 8 -->
+    <div class="col-sm-4">
+      {% include 'Order/basket.html.twig' %}
+    </div><!-- col 4 -->
+  </div><!-- row -->
 
 {% endblock content %}

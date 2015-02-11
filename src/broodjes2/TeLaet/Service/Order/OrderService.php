@@ -63,10 +63,10 @@ class OrderService extends Service {
     $repo = $this->getRepo(Entities::BREAD);
     $bread = $repo->find($id);
     if (!isset($bread)) {
-      throw new ElementNotFoundException();
+      throw new ElementNotFoundException($id);
     }
     $this->addBread($bread);
-    return $_SESSION['basket'];
+    return $bread;
   }
   
 
@@ -82,6 +82,13 @@ class OrderService extends Service {
     $data['toppings'] = $toppings;
     $data['basket'] = $this->getBasket();
     return $data;
+  }
+  
+  public function removeOrderlineWithKey($key) {
+    if (!isset($_SESSION['basket'][$key])) {
+      throw new ElementNotFoundException($key);
+    }
+    unset($_SESSION['basket'][$key]);
   }
 
 }

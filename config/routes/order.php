@@ -19,3 +19,7 @@ $app->get('/order/empty/basket', function() use ($contr) {
 $app->get('/order/add/topping/:key', function($key) use ($contr) {
   $contr->addToppingPage($key);
 })->name('order_add_topping_page');
+
+$app->get('/order/remove/bread/:key', function($key) use ($contr){
+  $contr->removeBread($key);
+})->name('order_remove_bread');

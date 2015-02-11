@@ -11,8 +11,8 @@ use Exception;
  */
 class ElementNotFoundException extends Exception {
 
-  public function __construct($code = null, $previous = null) {
-    $message = "Element not found";
+  public function __construct($element, $code = null, $previous = null) {
+    $message = "$element not found";
     parent::__construct($message, $code, $previous);
   }
 
