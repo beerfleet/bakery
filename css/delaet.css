@@ -295,6 +295,7 @@ h2 {
 }
 #paper {
   background-color: white; 
+  background-image: url(../img/order_note.jpg);  
   margin-left: 6px;
 }
 #paper .topping {
