@@ -147,6 +147,23 @@ li:hover {
 
 /* CONTENT: ADMIN */
 /* breads */
+.bread-price {
+  font-size: 1.3em;
+}
+.bread-name {
+  border-top: 3px solid #e3e3e3;
+  background-color: #fffaf2;
+}
+.bread.bodyBG {
+  /*background-color: red;*/  
+  background-color: white;
+  padding: 3px;
+  border: solid 1px #e3e3e3;
+}
+.bread.bodyBG:hover {
+  transition: linear all .5s;
+  background-color: #fff4b9;
+}
 #bread-panel,
 #topping-panel {  
   border-radius: 5px;
@@ -169,6 +186,12 @@ li:hover {
   padding-bottom: 5px;
   margin-bottom: 12px;
   padding: 5px;
+}
+
+.total {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .pad-right-6 {
