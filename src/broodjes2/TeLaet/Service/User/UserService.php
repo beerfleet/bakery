@@ -2,6 +2,7 @@
 
 namespace broodjes2\TeLaet\Service\User;
 
+use broodjes2\TeLaet\Service\BCrypt;
 use Doctrine\ORM\EntityManager;
 use broodjes2\TeLaet\Entities\Constants\Entities;
 use Doctrine\ORM\Repository;
@@ -53,6 +54,7 @@ class UserService {
    * @param array() $post
    */
   public function storeUser($post) {
+    $crypt = new BCrypt();
     /* @var $em EntityManager */
     $em = $this->em;
     $repo = $em->getRepository(Entities::POSTCODE);
@@ -63,7 +65,7 @@ class UserService {
     $user->setUsername($post['username']);
     $user->setEmail($post['email']);
     $user->setEnabled(0);
-    $password = password_hash($post['password'], CRYPT_BLOWFISH);
+    $password = $crypt->password_hash($post['password'], CRYPT_BLOWFISH);
     $user->setPassword($password);
     $user->setFirstName($post['firstname']);
     $user->setSurname($post['surname']);
@@ -110,20 +112,20 @@ class UserService {
   }
 
   public function validateCredentials($app) {
+    $crypt = new BCrypt();
     $em = $this->em;
     $repo = $em->getRepository(Entities::USER);
     /* @var $user User */
     $user = $repo->findByUsername($app->request->post('username'));
     $password = $app->request->post('password');
     $hash = $user->getPassword();
-    if (isset($user) && password_verify($password, $hash)) {
+    if (isset($user) && $crypt->password_verify($password, $hash)) {
       return $user;
     }
     return null;
   }
 
   /* password reset */
-
   public function mailResetRequest($app) {
     $email = $app->request->post('email');
     $em = $this->em;
