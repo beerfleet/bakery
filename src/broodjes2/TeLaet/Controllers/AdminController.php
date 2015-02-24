@@ -8,6 +8,7 @@ use broodjes2\TeLaet\Service\Admin\AdminService;
 use broodjes2\TeLaet\Service\Bread\BreadService;
 use broodjes2\TeLaet\Service\User\UserService;
 use broodjes2\TeLaet\Exceptions\AccessDeniedException;
+use broodjes2\TeLaet\Exceptions\InvalidRequestException;
 use broodjes2\TeLaet\Exceptions\ImageException;
 use Slim\Slim;
 
@@ -196,9 +197,15 @@ class AdminController extends Controller {
   /* users */
   public function listAllUsers() {
     $app = $this->getApp();
-    $srv = new UserService($this->getEntityManager());
-    $users = $srv->fetchAllUsers();
-    $app->render('Admin/user_list.html.twig', array('users' => $users));
+    try {      
+      $srv = new UserService($this->getEntityManager());
+      $users = $srv->fetchAllUsersSecure();
+      $app->render('Admin/user_list.html.twig', array('users' => $users));
+    } catch (AccessDeniedException $e) {
+      $app->flash('error', $e->getMessage());
+      $app->redirectTo('main_page');
+    }
+
   }
 
   public function editUser($id) {
@@ -231,6 +238,24 @@ class AdminController extends Controller {
     }
   }
 
+  public function setUserEnabledState($id, $state) {
+    /* @var $app Slim */
+    $app = $this->getApp();
+    try {
+      if (!$app->request()->isXhr()) {
+        throw new InvalidRequestException();
+      }
+      $srv = new AdminService($this->getEntityManager());
+      $srv->setUserEnabledState($id, $state);
+    } catch (InvalidRequestException $e) {
+      $app->flash('error', $e->getMessage());
+    } catch (AccessDeniedException $e) {
+      $app->flash('error', $e->getMessage());
+    } finally {
+      $app->redirectTo('main_page');
+    }
+  }
+
   //users
 
 
@@ -253,7 +278,7 @@ class AdminController extends Controller {
     try {
       $srv = new AdminService($this->getEntityManager());
       $srv->uploadBreadImage('image');
-      $app->flash('info',  $_FILES['image']['name'] . ' succesfully uploaded');
+      $app->flash('info', $_FILES['image']['name'] . ' succesfully uploaded');
       $app->redirectTo('admin_images_manage');
     } catch (ImageException $e) {
       $app->flash('error', $e->getMessage());
@@ -286,7 +311,7 @@ class AdminController extends Controller {
       $app->redirectTo('admin_images_manage');
     }
   }
-  
+
   public function deleteToppingImg($filename) {
     $app = $this->getApp();
     try {
@@ -299,8 +324,6 @@ class AdminController extends Controller {
       $app->redirectTo('admin_images_manage');
     }
   }
-  
-  
 
   //images
 }

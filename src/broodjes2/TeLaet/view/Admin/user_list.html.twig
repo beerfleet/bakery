@@ -17,9 +17,10 @@
           <th>Username</th>
           <th>Surname</th>
           <th>Name</th>
+          <th>Enabled</th>
           <th>E-mail</th>
-          <th>Postcode</th>
-
+          <th>Town</th>
+          
         </tr>
       </thead>
       <tbody>
@@ -33,6 +34,9 @@
             </td>
             <td>{{ user.surname }}</td>
             <td>{{ user.firstName }}</td>
+            <td>
+              <input data-userid="{{ user.id }}" type="checkbox" class="enabled" name="enabled" {% if user.enabled == 1 %} checked {% endif %} />
+            </td>
             <td>{{ user.email }}</td>
             <td>{{ user.postcode.town }}</td>
           </tr>
@@ -49,5 +53,6 @@
     $(function () {
       $('#user-table').DataTable();
     });
-  </script>
+  </script>  
+  <script src="../js/enable.js"></script>
 {% endblock extrajs %}

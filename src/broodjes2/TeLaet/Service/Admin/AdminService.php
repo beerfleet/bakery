@@ -5,6 +5,7 @@ namespace broodjes2\TeLaet\Service\Admin;
 use broodjes2\TeLaet\Entities\Constants\Entities;
 use broodjes2\TeLaet\Entities\Constants\Files;
 use Doctrine\ORM\EntityRepository;
+use broodjes2\TeLaet\Entities\User;
 use broodjes2\TeLaet\Exceptions\AccessDeniedException;
 use broodjes2\TeLaet\Exceptions\ImageException;
 use broodjes2\TeLaet\Exceptions\NoImageSelectedException;
@@ -30,6 +31,13 @@ class AdminService {
     $em = $this->em;
     $repo = $em->getRepository(Entities::USER);
     $user = $repo->findBy(array('username' => $username));
+    return $user;
+  }
+  
+  public function queryUserById($id) {
+    $em = $this->em;
+    $repo = $em->getRepository(Entities::USER);
+    $user = $repo->find($id);
     return $user;
   }
 
@@ -62,6 +70,17 @@ class AdminService {
     $vars['breads'] = $this->provideBreads();
     $vars['toppings'] = $this->provideToppings();
     return $vars;
+  }
+  
+  public function setUserEnabledState($id, $state) {    
+    if (!$this->isUserAdmin()) {
+      throw new AccessDeniedException();
+    }
+    /* @var $user User */
+    $user = $this->queryUserById($id);
+    $user->setEnabled($state);
+    $this->em->merge($user);
+    $this->em->flush();
   }
 
   public function provideBreads() {

@@ -3,6 +3,7 @@
 namespace broodjes2\TeLaet\Service\User;
 
 use broodjes2\TeLaet\Service\BCrypt;
+use broodjes2\TeLaet\Service\Admin\AdminService;
 use Doctrine\ORM\EntityManager;
 use broodjes2\TeLaet\Entities\Constants\Entities;
 use Doctrine\ORM\Repository;
@@ -11,6 +12,7 @@ use broodjes2\TeLaet\Service\Validation\PasswordValidation;
 use broodjes2\TeLaet\Service\Validation\EditUserValidation;
 use broodjes2\TeLaet\Entities\User;
 use Slim\Slim;
+use broodjes2\TeLaet\Exceptions\AccessDeniedException;
 
 /**
  * UserService
@@ -117,6 +119,9 @@ class UserService {
     $repo = $em->getRepository(Entities::USER);
     /* @var $user User */
     $user = $repo->findByUsername($app->request->post('username'));
+    if (!isset($user)){
+      return;
+    }
     $password = $app->request->post('password');
     $hash = $user->getPassword();
     if (isset($user) && $crypt->password_verify($password, $hash)) {
@@ -191,6 +196,14 @@ class UserService {
     $repo = $em->getRepository(Entities::USER);
     $users = $repo->findAll();
     return $users;
+  }
+  
+  public function fetchAllUsersSecure() {
+    $admin_srv = new AdminService($this->em);
+    if (!$admin_srv->isUserAdmin()) {
+      throw new AccessDeniedException();
+    }
+    return $this->fetchAllUsers();
   }
 
   public function fetchUserById($id) {

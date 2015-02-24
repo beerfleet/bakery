@@ -2,7 +2,7 @@
 $(function () {
   $("#body").addClass('load');
   onChange();
-  onFileselect();
+  onFileselect();  
 });
 
 function onChange() {

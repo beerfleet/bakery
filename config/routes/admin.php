@@ -68,6 +68,10 @@ $app->post('/admin/user/edit', function() use ($contr){
   $contr->editUserProcess();
 })->name('admin_user_edit_process');
 
+$app->get('/admin/user/:id/enable/:state', function($id, $state) use ($contr) {
+  $contr->setUserEnabledState($id, $state);
+})->name('admin_user_enable');
+
 
 /* images */
 $app->get('/admin/images', function() use ($contr) {
