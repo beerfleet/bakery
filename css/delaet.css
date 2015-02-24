@@ -113,9 +113,9 @@
 }
 #header .container {
   background-image: url('../img/headbg.png');
-  background-repeat:  no-repeat;
-  background-position: center;
-  height: 160px;
+  background-repeat:  no-repeat;  
+  background-size: 800px auto;
+  background-position: right;
 }
 #header h1 {
   text-align: center;
