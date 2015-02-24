@@ -46,8 +46,8 @@
 }
 .bodyBG,
 #manage_img article {
-  border-radius: 5px;
-  background-color: beige;
+  border-radius: 5px;  
+  background-color: #f3efef;
   padding: 12px;
   padding-top: 1px;
 }
@@ -102,9 +102,16 @@
 
 
 /* header */
+#logo {
+  height: 160px;
+  width: 160px;
+  background-image: url(../img/logo.png);
+  background-repeat: no-repeat;
+}
 #header {
-  /*background-color: #fff1cd;*/
-  /*background-color: #BEA884;*/  
+  background-color: #f2f2f2;
+}
+#header .container {
   background-image: url('../img/headbg.png');
   background-repeat:  no-repeat;
   background-position: center;
@@ -146,6 +153,7 @@ li:hover {
 
 
 /* CONTENT: ADMIN */
+
 /* breads */
 .bread-price {
   font-size: 1.3em;
